@@ -1,0 +1,23 @@
+<% title "Promotions" %>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Title</th>
+    <th>Blurb</th>
+    <th>Resource Url</th>
+  </tr>
+  <% for promotion in @promotions %>
+    <tr>
+      <td><%=h promotion.type %></td>
+      <td><%=h promotion.title %></td>
+      <td><%=h promotion.blurb %></td>
+      <td><%=h promotion.resource_url %></td>
+      <td><%= link_to "Show", promotion %></td>
+      <td><%= link_to "Edit", edit_promotion_path(promotion) %></td>
+      <td><%= link_to "Destroy", promotion, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Promotion", new_promotion_path %></p>

@@ -1,0 +1,20 @@
+<% form_for @promotion do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :blurb %><br />
+    <%= f.text_area :blurb %>
+  </p>
+  <p>
+    <%= f.label :resource_url %><br />
+    <%= f.text_field :resource_url %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,0 +1,11 @@
+one:
+  type: MyString
+  title: MyString
+  blurb: MyText
+  resource_url: MyString
+
+two:
+  type: MyString
+  title: MyString
+  blurb: MyText
+  resource_url: MyString
