@@ -15,4 +15,8 @@ class ContentTypes::Base
     raise "Plugin without name: #{self}"
   end
 
+  def self.model
+    raise "Not implemented: #{self.class.name}"
+  end
+
 end
