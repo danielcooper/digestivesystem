@@ -1,8 +1,5 @@
 class ContentTypes::Base
-  require 'net/http'
-  require 'uri'
-  require 'json/add/rails'
-
+  
   def self.inherited(klass)
     ContentTypes::PluginManager.instance << klass
   end
