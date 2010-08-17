@@ -13,7 +13,7 @@ class ContentTypes::Plugins::BBCEpisodeResource < ContentTypes::Base
   end
 
 	def self.model
-		:bbc_episode_promotion
+		 "BBCEpisodePromotion"
 	end
 
 	def fetch_episode_information
@@ -27,7 +27,4 @@ class ContentTypes::Plugins::BBCEpisodeResource < ContentTypes::Base
       {:resource_url => @url, :title => @episode_data["programme"]["title"], :blurb => @episode_data["programme"]["short_synopsis"], :type => self.class.model.to_s.camelize}
     end
   end
-
-
-
 end

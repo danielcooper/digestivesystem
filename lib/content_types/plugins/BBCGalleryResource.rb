@@ -23,7 +23,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   end
 
   def self.model
-    :bbc_gallery_promotion
+    "BBCGalleryPromotion"
   end
 
 

@@ -44,5 +44,4 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
       blog_attributes
     end
   end
-
 end

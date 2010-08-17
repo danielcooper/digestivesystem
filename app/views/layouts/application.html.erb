@@ -8,6 +8,9 @@
   </head>
   <body>
     <div id="container">
+      <a style="float:right; background: white; border: 1px;" href="
+         javascript:location.href='http://digestivesystem.heroku.com//promotions/new/?url='+encodeURIComponent(%20location.href%20)
+         ">Bookmarklett</a>
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>
