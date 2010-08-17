@@ -15,7 +15,7 @@ class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
   end
 
   def self.can_handle_resource_type? url
-    /http:\/\/twitter\.com\/[^\/]*\/status\/(\d*)/.match(url)
+    /http:\/\/w{0,3}\.?twitter\.com\/[^\/]*\/status\/(\d*)/.match(url)
   end
 
 
@@ -27,10 +27,7 @@ class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
   def attributes
     @attributes ||= begin
       @twitter_data ||= fetch_twitter_infomation_for(@twitter_status_id)
-      {:resource_url => @url, :title => @twitter_data["text"], :blurb => @twitter_data["text"], :type => "TweetPromotion"}
+      {:resource_url => @url, :title => @twitter_data["text"], :blurb => @twitter_data["text"], :type => self.class.model.to_s.camelize}
     end
   end
-
-
-
 end

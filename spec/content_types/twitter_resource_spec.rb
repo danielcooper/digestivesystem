@@ -25,6 +25,7 @@ describe ContentTypes::Plugins::TwitterResource do
  it "should spit out pre-populate data" do
     r = @twitter_resource.new("http://twitter.com/Saddleton/status/21321549812")
     r.attributes[:blurb].should == "@daniel_cooper and @halbpro are probably rocking the BBC's socks off right now."
+		r.attributes[:type].should == r.class.model.to_s.camelize
  end
 
 end
