@@ -6,7 +6,7 @@ require "#{RAILS_ROOT}/lib/content_types/plugin_manager"
 
 describe ContentTypes::Plugins::TwitterResource do
   before(:each) do
-    @blog_resource = ContentTypes::Plugins::BBCBlogResource
+    @blog_resource = ContentTypes::Plugins::BBCGalleryResource
   end
 
   it "should match for twitter requests" do

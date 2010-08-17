@@ -1,4 +1,4 @@
-class ContentTypes::Plugins::BBCBlogResource < ContentTypes::Base
+class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   require 'simple-rss'
   require 'open-uri'
   SimpleRSS.feed_tags << :summary

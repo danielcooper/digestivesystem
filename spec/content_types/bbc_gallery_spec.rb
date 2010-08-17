@@ -29,4 +29,3 @@ describe ContentTypes::Plugins::BBCGalleryResource do
  end
 
 end
-
