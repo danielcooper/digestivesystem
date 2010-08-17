@@ -1,4 +1,7 @@
 class PromotionsController < ApplicationController
+
+  before_filter :load_plugins
+
   def index
     @promotions = Promotion.all
   end
@@ -8,7 +11,11 @@ class PromotionsController < ApplicationController
   end
   
   def new
-    @promotion = Promotion.new
+    if params[:url]
+      @provided_url = params[:url]
+      attributes = fetch_prefilled_attributes_for @provided_url
+      @promotion = Promotion.new(attributes)
+    end
   end
   
   def create
@@ -40,5 +47,22 @@ class PromotionsController < ApplicationController
     @promotion.destroy
     flash[:notice] = "Successfully destroyed promotion."
     redirect_to promotions_url
+  end
+
+  protected
+
+  def fetch_prefilled_attributes_for url
+    attributes = {}
+    ContentTypes::PluginManager.instance.each do |n|
+      if n.can_handle_resource_type?(url)
+        attributes = n.new(url).attributes
+        raise attributes.inspect
+      end
+    end
+    return attributes
+  end
+
+  def load_plugins
+    require "#{RAILS_ROOT}/lib/content_types/plugin_manager"
   end
 end
