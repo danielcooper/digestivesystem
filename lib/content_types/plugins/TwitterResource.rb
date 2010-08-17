@@ -10,6 +10,10 @@ class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
     :radio1_tweet
   end
 
+  def self.model
+    :twitter_promotion
+  end
+
   def self.can_handle_resource_type? url
     /http:\/\/twitter\.com\/[^\/]*\/status\/(\d*)/.match(url)
   end
