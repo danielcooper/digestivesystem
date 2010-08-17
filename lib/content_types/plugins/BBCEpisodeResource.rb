@@ -13,7 +13,7 @@ class ContentTypes::Plugins::BBCEpisodeResource < ContentTypes::Base
   end
 
 	def self.model
-		:bbc_episode_promotion
+		 "BBCEpisodePromotion"
 	end
 
 	def fetch_episode_information

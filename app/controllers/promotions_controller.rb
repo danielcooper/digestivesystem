@@ -14,15 +14,23 @@ class PromotionsController < ApplicationController
     if params[:url]
       @provided_url = params[:url]
       attributes = fetch_prefilled_attributes_for @provided_url
-      @promotion = Promotion.new(attributes)
+      unless attributes.empty?
+        @promotion = attributes[:type].constantize.new(attributes)
+      else
+        flash[:notice] = "We couldn't get any infomation from that url!"
+        @promotion = Promotion.new
+      end
+    else
+      flash[:notice] = "No URL specified."
+      @promotion = Promotion.new
     end
   end
   
   def create
-    @promotion = Promotion.new(params[:promotion])
+    @promotion = params[:promotion][:type].constantize.new(params[:promotion])
     if @promotion.save
       flash[:notice] = "Successfully created promotion."
-      redirect_to @promotion
+      redirect_to promotion_path(@promotion)
     else
       render :action => 'new'
     end
@@ -56,7 +64,6 @@ class PromotionsController < ApplicationController
     ContentTypes::PluginManager.instance.each do |n|
       if n.can_handle_resource_type?(url)
         attributes = n.new(url).attributes
-        raise attributes.inspect
       end
     end
     return attributes

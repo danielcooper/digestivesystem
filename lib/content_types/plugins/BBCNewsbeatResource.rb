@@ -9,7 +9,7 @@ class ContentTypes::Plugins::BBCNewsbeatResource < ContentTypes::Base
   end
 
   def self.model
-    :BBC_newsbeat_promotion
+    "BBCNewsbeatPromotion"
   end
 
   def self.can_handle_resource_type? url
@@ -21,7 +21,7 @@ class ContentTypes::Plugins::BBCNewsbeatResource < ContentTypes::Base
       res = Net::HTTP.get(URI.parse(@url))
       doc = Hpricot.parse(res)
 
-      output = {:resource_url => @url, :type => self.class.model.to_s.camelize}
+      output = {:resource_url => @url, :type => self.class.model}
 
       targeted_tags = [["Headline",:title],["Description",:blurb]]
       doc.search("//meta").each do |meta_tag|

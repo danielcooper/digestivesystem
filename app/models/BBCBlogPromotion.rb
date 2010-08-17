@@ -1,0 +1,3 @@
+class BBCBlogPromotion < Promotion
+  
+end

@@ -13,9 +13,9 @@
       <td><%=h promotion.title %></td>
       <td><%=h promotion.blurb %></td>
       <td><%=h promotion.resource_url %></td>
-      <td><%= link_to "Show", promotion %></td>
+      <td><%= link_to "Show", promotion_path(promotion) %></td>
       <td><%= link_to "Edit", edit_promotion_path(promotion) %></td>
-      <td><%= link_to "Destroy", promotion, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Destroy", promotion_path(promotion), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
