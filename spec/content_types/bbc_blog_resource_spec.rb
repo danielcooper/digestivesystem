@@ -4,7 +4,7 @@
 require 'spec_helper'
 require "#{RAILS_ROOT}/lib/content_types/plugin_manager"
 
-describe ContentTypes::Plugins::TwitterResource do
+describe ContentTypes::Plugins::BBCBlogResource do
   before(:each) do
     @blog_resource = ContentTypes::Plugins::BBCBlogResource
   end

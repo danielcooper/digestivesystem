@@ -1,4 +1,4 @@
-class ContentTypes::Plugins::BBCBlogResource < ContentTypes::Base
+class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   require 'simple-rss'
   require 'open-uri'
   SimpleRSS.feed_tags << :summary
@@ -25,7 +25,7 @@ class ContentTypes::Plugins::BBCBlogResource < ContentTypes::Base
   end
 
   def self.model
-    "BBCBlogPromotion"
+    "BBC Blog Promotion"
   end
 
   def attributes
@@ -44,5 +44,4 @@ class ContentTypes::Plugins::BBCBlogResource < ContentTypes::Base
       blog_attributes
     end
   end
-
 end
