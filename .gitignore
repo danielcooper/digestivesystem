@@ -1,4 +1,4 @@
 *.log
 *.sqlite3
-./nbproject
+/nbproject
 /db/schema.rb

@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :promotions
+  map.root :controller => "promotions", :action => "index"
+	map.resources :promotions
+	
 
   # The priority is based upon order of creation: first created -> highest priority.
 
