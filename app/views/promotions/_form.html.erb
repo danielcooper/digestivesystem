@@ -15,4 +15,5 @@
     <%= f.label :resource_url %><br />
     <%= f.text_field :resource_url %>
   </p>
+  <%= render :partial => model.class.name.underscore, :locals => { :f => f } rescue ""%>
   <p><%= f.submit %></p>

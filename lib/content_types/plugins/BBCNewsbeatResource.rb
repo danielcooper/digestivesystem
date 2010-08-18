@@ -23,7 +23,7 @@ class ContentTypes::Plugins::BBCNewsbeatResource < ContentTypes::Base
 
       output = {:resource_url => @url, :type => self.class.model}
 
-      targeted_tags = [["Headline",:title],["Description",:blurb]]
+      targeted_tags = [["Headline",:title],["Description",:blurb],["THUMBNAIL_URL",:external_image_url]]
       doc.search("//meta").each do |meta_tag|
         targeted_tags.each do |target|
             output[target.last] = meta_tag.attributes["content"] if target.first == meta_tag.attributes["name"]
