@@ -23,7 +23,7 @@ describe ContentTypes::Plugins::BBCGalleryResource do
   end
 
  it "should spit out pre-populate data" do
-    r = @bbc_gallery_resource.new("http://www.bbc.co.uk/radio1/photos/gregjames/5551/24#gallery5551")
+    r = @bbc_gallery_resource.new("http://www.bbc.co.uk/radio1/photos/gregjames/5551/")
     r.attributes[:blurb].should == "Check out who Greg has been spending quality time with...."
 		r.attributes[:type].should == r.class.model.to_s.camelize
 		r.attributes[:external_image_url].kind_of?(Array).should == true

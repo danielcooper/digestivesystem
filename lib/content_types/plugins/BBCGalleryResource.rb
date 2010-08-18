@@ -5,7 +5,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
 	# Match 3 = Gallery ID
 	# Match 4 = Photo Number
   def self.can_handle_resource_type? url
-    /(http:\/\/w{0,3}\.?bbc\.co\.uk\/radio1\/photos\/)([^\/]*)\/(\d+)\/(\d*)/.match(url)
+    /(http:\/\/w{0,3}\.?bbc\.co\.uk\/radio1\/photos\/)([^\/]*)\/(\d+)\/?(\d*)/.match(url)
   end
 
   def initialize url
@@ -15,7 +15,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
 		@gallery_base = matches[1]
     @gallery_brand = matches[2]
     @gallery_id = matches[3]
-    @gallery_position = matches[4]
+    @gallery_position = matches.length > 3 ? matches[4] : nil
   end
 
   def self.plugin_name
@@ -32,10 +32,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
     res.gsub!(/,[^}"\]]*\}/, "}")
 		res.gsub!(/\},[^\]\{]*\]/, "} ]")
 		@gallery_data = JSON.parse(res)
-		@gallery_images = @gallery_data["gallery"]["photos"].length > 1 ? [] : @gallery_data["gallery"]["photos"][1]["image_sqaure"]
-		@gallery_data["gallery"]["photos"].each do |photo|
-			@gallery_images << photo["image_square"]
-		end
+		@gallery_images = @gallery_data["gallery"]["photos"].length == 1  ? @gallery_data["gallery"]["photos"][1]["image_square"] : @gallery_data["gallery"]["photos"].map{ |photo| photo["image_square"]}
 		@gallery_data
 	end
 

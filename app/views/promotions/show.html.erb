@@ -16,6 +16,12 @@
   <strong>Resource Url:</strong>
   <%=h @promotion.resource_url %>
 </p>
+<% if @promotion.external_image_url != nil %>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @promotion.external_image_url, :alt => "#{@promotion.title} Image" %>
+</p>
+<% end %>
 
 <p>
   <%= link_to "Edit", edit_promotion_path(@promotion) %> |
