@@ -1,3 +1,10 @@
 class Promotion < ActiveRecord::Base
-  attr_accessible :type, :title, :blurb, :resource_url
+
+  def chosen_image
+    if external_url_image
+      return external_url_image
+    end
+    return nil
+  end
+  
 end

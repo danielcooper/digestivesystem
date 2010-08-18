@@ -29,5 +29,4 @@ describe ContentTypes::Plugins::BBCGalleryResource do
 		r.attributes[:external_image_url].kind_of?(Array).should == true
 		r.attributes[:external_image_url].length.should == 28
  end
-
 end

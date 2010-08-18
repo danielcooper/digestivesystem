@@ -4,21 +4,25 @@
   <head>
     <title><%= h(yield(:title) || "Untitled") %></title>
     <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'jquery' %>
+    <%= javascript_include_tag 'jquery-ui' %>
+    <%= javascript_include_tag 'jrails' %>
     <%= yield(:head) %>
   </head>
   <body>
+    <div style=" width: 75%; margin-left:auto; margin-right: auto; "><img src="/images/bbc.png"></img></div>
     <div id="container">
       <a style="float:right; background: white; border: 1px;" href="
-         javascript:location.href='http://digestivesystem.heroku.com//promotions/new/?url='+encodeURIComponent(%20location.href%20)
-         ">Bookmarklett</a>
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <%- end -%>
-      
+         javascript:location.href='http://digestivesystem.heroku.com/promotions/new/?url='+encodeURIComponent(%20location.href%20)
+         ">Bookmarklet</a>
+         <%- flash.each do |name, msg| -%>
+           <%= content_tag :div, msg, :id => "flash_#{name}" %>
+         <%- end -%>
+
       <%- if show_title? -%>
-        <h1><%=h yield(:title) %></h1>
+        <h2><%=h yield(:title) %></h2>
       <%- end -%>
-      
+
       <%= yield %>
     </div>
   </body>
