@@ -12,7 +12,8 @@ describe ContentTypes::Plugins::BBCEpisodeResource do
   it "should match for bbc episode requests" do
     r = @bbc_episode_resource.can_handle_resource_type?("http://www.bbc.co.uk/programmes/b00tdmhg")
     r.class.should_not == nil
-    r.length.should == 1
+		puts r.class
+    r.length.should == 2
     r[0].should == "http://www.bbc.co.uk/programmes/b00tdmhg"
   end
 
