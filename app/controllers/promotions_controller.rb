@@ -13,7 +13,7 @@ class PromotionsController < ApplicationController
   def new
     if params[:url]
       @provided_url = params[:url]
-      attributes = fetch_prefilled_attributes_for @provided_url
+      attributes = fetch_prefilled_attributes_for @provided_url rescue ""
       unless attributes.empty?
         @promotion = attributes[:type].constantize.new(attributes)
       else
