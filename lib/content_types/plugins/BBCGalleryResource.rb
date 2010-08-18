@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
 
 	# Match 1 = Route URL of Galleries (i.e. /radio1/photos)
