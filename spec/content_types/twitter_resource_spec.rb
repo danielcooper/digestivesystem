@@ -10,7 +10,7 @@ describe ContentTypes::Plugins::TwitterResource do
   end
 
   it "should match for twitter requests" do
-    r = @twitter_resource.can_handle_resource_type?("http://twitter.com/Saddleton/status/21321549812")
+    r = @twitter_resource.can_handle_resource_type?("http://www.twitter.com/Saddleton/status/21321549812")
     r.class.should_not == nil
     r.length.should == 2
     r[1].should == "21321549812"
@@ -25,7 +25,6 @@ describe ContentTypes::Plugins::TwitterResource do
  it "should spit out pre-populate data" do
     r = @twitter_resource.new("http://twitter.com/Saddleton/status/21321549812")
     r.attributes[:blurb].should == "@daniel_cooper and @halbpro are probably rocking the BBC's socks off right now."
-		r.attributes[:type].should == r.class.model.to_s.camelize
  end
 
 end

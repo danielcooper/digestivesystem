@@ -11,7 +11,7 @@ class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
   end
 
   def self.model
-    "TwitterPromotion"
+    :twitter_promotion
   end
 
   def self.can_handle_resource_type? url

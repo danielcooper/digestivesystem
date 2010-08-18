@@ -25,7 +25,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   end
 
   def self.model
-    :bbc_blog_post_promotion
+    "BBC Blog Promotion"
   end
 
   def attributes
