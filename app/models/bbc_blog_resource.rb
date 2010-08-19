@@ -1,0 +1,3 @@
+class BbcBlogResource < Resource
+  
+end

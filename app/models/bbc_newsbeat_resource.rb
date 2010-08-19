@@ -1,0 +1,3 @@
+class BbcNewsbeatResource < Resource
+  
+end

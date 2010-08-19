@@ -1,3 +1,0 @@
-class BBCEpisodePromotion < Promotion
-  
-end

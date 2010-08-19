@@ -1,0 +1,30 @@
+<% title "Promotion" %>
+
+<p>
+  <strong>Type:</strong>
+  <%=h @resource.type %>
+</p>
+<p>
+  <strong>Title:</strong>
+  <%=h @resource.title %>
+</p>
+<p>
+  <strong>Blurb:</strong>
+  <%=h @resource.blurb %>
+</p>
+<p>
+  <strong>Resource Url:</strong>
+  <%=h @resource.resource_url %>
+</p>
+<% if @resource.external_image_url != nil %>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @resource.external_image_url, :alt => "#{@resource.title} Image" %>
+</p>
+<% end %>
+
+<p>
+  <%= link_to "Edit", edit_resource_path(@resource) %> |
+  <%= link_to "Destroy", resource_path(@resource), :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", resources_path %>
+</p>

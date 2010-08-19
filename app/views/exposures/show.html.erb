@@ -1,0 +1,20 @@
+<% title "Exposure" %>
+
+<p>
+  <strong>Birth:</strong>
+  <%=h @exposure.birth %>
+</p>
+<p>
+  <strong>Death:</strong>
+  <%=h @exposure.death %>
+</p>
+<p>
+  <strong>Stream:</strong>
+  <%=h @exposure.stream_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_exposure_path(@exposure) %> |
+  <%= link_to "Destroy", @exposure, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", exposures_path %>
+</p>

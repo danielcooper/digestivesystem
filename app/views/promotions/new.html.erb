@@ -1,7 +1,0 @@
-<% title "New Promotion" %>
-
-<% form_for 'promotion', @promotion, :url => promotions_path, :html => {:method => :post} do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f, :model => @promotion } %>
-<%end%>
-
-<p><%= link_to "Back to List", promotions_path %></p>

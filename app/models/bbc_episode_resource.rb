@@ -1,0 +1,3 @@
+class BbcEpisodeResource < Resource
+  
+end

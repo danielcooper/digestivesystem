@@ -9,7 +9,7 @@ class ContentTypes::Plugins::BBCNewsbeatResource < ContentTypes::Base
   end
 
   def self.model
-    "BBCNewsbeatPromotion"
+    "BbcNewsbeatResource"
   end
 
   def self.can_handle_resource_type? url
