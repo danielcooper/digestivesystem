@@ -23,7 +23,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   end
 
   def self.model
-    "BBCGalleryPromotion"
+    "BbcGalleryPromotion"
   end
 
 
@@ -43,5 +43,6 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
       {:resource_url => @url, :title => @gallery_data["gallery"]["title"], :blurb => @gallery_data["gallery"]["description"], :type => self.class.model.to_s.camelize, :external_image_url => @gallery_images, :pid => @pid}
     end
   end
+
 
 end

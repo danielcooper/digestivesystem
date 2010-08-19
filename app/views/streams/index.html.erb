@@ -1,0 +1,19 @@
+<% title "Streams" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Display Name</th>
+  </tr>
+  <% for stream in @streams %>
+    <tr>
+      <td><%=h stream.name %></td>
+      <td><%=h stream.display_name %></td>
+      <td><%= link_to "Show", [@service,stream] %></td>
+      <td><%= link_to "Edit", edit_service_stream_path(@service,stream) %></td>
+      <td><%= link_to "Destroy", [@service,stream], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Streams", new_service_stream_path(@service) %></p>

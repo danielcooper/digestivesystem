@@ -1,0 +1,3 @@
+class BbcGalleryResource < Resource
+	
+end

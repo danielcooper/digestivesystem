@@ -1,3 +1,0 @@
-class BBCNewsbeatPromotion < Promotion
-  
-end

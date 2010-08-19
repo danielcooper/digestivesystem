@@ -15,6 +15,6 @@
     <%= f.label :resource_url %><br />
     <%= f.text_field :resource_url %>
   </p>
-  <%= render :partial => model.class.name.underscore, :locals => { :f => f , :model => @promotion} rescue ""%>
+  <%= render :partial => model.class.name.underscore, :locals => { :f => f , :model => @resource} rescue ""%>
   <br clear="all" />
   <p><%= f.submit %></p>

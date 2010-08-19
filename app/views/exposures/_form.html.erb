@@ -1,0 +1,16 @@
+<% form_for [@service,@stream,@exposure] do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :birth %><br />
+    <%= f.datetime_select :birth %>
+  </p>
+  <p>
+    <%= f.label :death %><br />
+    <%= f.datetime_select :death %>
+  </p>
+  <p>
+    <%= f.label :stream_id %><br />
+    <%= f.text_field :stream_id %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

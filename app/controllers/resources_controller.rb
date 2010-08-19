@@ -1,13 +1,13 @@
-class PromotionsController < ApplicationController
+class ResourcesController < ApplicationController
 
   before_filter :load_plugins
 
   def index
-    @promotions = Promotion.all
+    @resources = Resource.all
   end
   
   def show
-    @promotion = Promotion.find(params[:id])
+    @resource = Resource.find(params[:id])
   end
   
   def new
@@ -15,46 +15,46 @@ class PromotionsController < ApplicationController
       @provided_url = params[:url]
       attributes = fetch_prefilled_attributes_for @provided_url
       unless attributes.empty?
-        @promotion = attributes[:type].constantize.new(attributes)
+        @resource = attributes[:type].constantize.new(attributes)
       else
         flash[:notice] = "We couldn't get any infomation from that url!"
-        @promotion = Promotion.new
+        @resource = Resource.new
       end
     else
       flash[:notice] = "No URL specified."
-      @promotion = Promotion.new
+      @resource = Resource.new
     end
   end
   
   def create
-    @promotion = params[:promotion][:type].constantize.new(params[:promotion])
-    if @promotion.save
-      flash[:notice] = "Successfully created promotion."
-      redirect_to promotion_path(@promotion)
+    @resource = params[:resource][:type].constantize.new(params[:resource])
+    if @resource.save
+      flash[:notice] = "Successfully created resource."
+      redirect_to resource_path(@resource)
     else
       render :action => 'new'
     end
   end
   
   def edit
-    @promotion = Promotion.find(params[:id])
+    @resource = Resource.find(params[:id])
   end
   
   def update
-    @promotion = Promotion.find(params[:id])
-    if @promotion.update_attributes(params[:promotion])
-      flash[:notice] = "Successfully updated promotion."
-      redirect_to @promotion
+    @resource = Resource.find(params[:id])
+    if @resource.update_attributes(params[:resource])
+      flash[:notice] = "Successfully updated resource."
+      redirect_to @resource
     else
       render :action => 'edit'
     end
   end
   
   def destroy
-    @promotion = Promotion.find(params[:id])
-    @promotion.destroy
-    flash[:notice] = "Successfully destroyed promotion."
-    redirect_to promotions_url
+    @resource = Resource.find(params[:id])
+    @resource.destroy
+    flash[:notice] = "Successfully destroyed resource."
+    redirect_to resources_url
   end
 
   protected

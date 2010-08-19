@@ -1,3 +1,0 @@
-class TwitterPromotion < Promotion
-  
-end

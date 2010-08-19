@@ -1,0 +1,16 @@
+<% title "Stream" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @stream.name %>
+</p>
+<p>
+  <strong>Display Name:</strong>
+  <%=h @stream.display_name %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_service_stream_path(@service,@stream) %> |
+  <%= link_to "Destroy", [@service,@stream], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", service_streams_path(@service) %>
+</p>
