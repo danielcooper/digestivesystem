@@ -1,6 +1,7 @@
 class BBCShow
 	require 'net/http'
 	require 'json'
+	require 'ostruct'
 
 	attr_accessor :info
 
@@ -24,20 +25,14 @@ class BBCShow
 	
 	def self.get_schedule time, service
 		(schedule = {"radio1" => "http://www.bbc.co.uk/radio1/programmes/schedules/england", "1xtra" => "http://www.bbc.co.uk/1xtra/programmes/schedules"}).default = schedule["radio1"]
-    @schedule_data = parse_json("#{schedule[service]}/#{time.year}/#{time.month}/#{time.day}.json")["schedule"]["day"]["broadcasts"]
+    @schedule_data = parse_json("#{schedule[service]}/#{time.year}/#{time.month}/#{time.day}.json").schedule.day.broadcasts["day"]["broadcasts"]
 	end
 
 	def self.parse_json url
 		JSON.parse(Net::HTTP.get(URI.parse(url)))
 	end
 
-	def method_missing method, *arg
-		if @info.has_key?(method.to_s)
-			return info[method.to_s]
-		else
-			super
-		end
-	end
+	
 
 	private_class_method :get_schedule, :parse_json, :new
 
