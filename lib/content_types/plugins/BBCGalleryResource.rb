@@ -5,7 +5,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
 	# Match 3 = Gallery ID
 	# Match 4 = Photo Number
   def self.can_handle_resource_type? url
-    /(http:\/\/w{0,3}\.?bbc\.co\.uk\/radio1\/photos\/)([^\/]*)\/(\d+)\/?(\d*)/.match(url)
+    /(http:\/\/w{0,3}\.?bbc\.co\.uk\/[^\/]*\/photos\/)([^\/]*)\/(\d+)\/?(\d*)/.match(url)
   end
 
   def initialize url
@@ -23,7 +23,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   end
 
   def self.model
-    "BbcGalleryResource"
+    "BbcGalleryPromotion"
   end
 
 
@@ -32,6 +32,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
     res.gsub!(/,[^}"\]]*\}/, "}")
 		res.gsub!(/\},[^\]\{]*\]/, "} ]")
 		@gallery_data = JSON.parse(res)
+		@pid = @gallery_data["gallery"]["brand_pid"]
 		@gallery_images = @gallery_data["gallery"]["photos"].length == 1  ? @gallery_data["gallery"]["photos"][1]["image_square"] : @gallery_data["gallery"]["photos"].map{ |photo| photo["image_square"]}
 		@gallery_data
 	end
@@ -39,8 +40,9 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
   def attributes
     @attributes ||= begin
       @gallery_data ||= fetch_gallery_information
-      {:resource_url => @url, :title => @gallery_data["gallery"]["title"], :blurb => @gallery_data["gallery"]["description"], :type => self.class.model.to_s.camelize, :external_image_url => @gallery_images}
+      {:resource_url => @url, :title => @gallery_data["gallery"]["title"], :blurb => @gallery_data["gallery"]["description"], :type => self.class.model.to_s.camelize, :external_image_url => @gallery_images, :pid => @pid}
     end
   end
+
 
 end
