@@ -1,4 +1,4 @@
-class BBCShow
+class BbcShow
 	require 'net/http'
 	require 'json'
 	require 'ostruct'
