@@ -5,7 +5,7 @@ class ContentTypes::Plugins::BBCNewsbeatResource < ContentTypes::Base
   end
 
   def self.plugin_name
-    :newsbeat
+    :newsbeat_post
   end
 
   def self.model

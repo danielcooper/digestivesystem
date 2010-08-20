@@ -1,3 +1,3 @@
-class BbcNewsbeatResource < Resource
+class BBCNewsbeatResource < Resource
   
 end

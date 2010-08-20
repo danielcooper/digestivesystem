@@ -4,6 +4,6 @@ class AddPid < ActiveRecord::Migration
   end
 
   def self.down
-		remove_column :promotoins, :pid, :string
+		remove_column :promotions, :pid, :string
   end
 end
