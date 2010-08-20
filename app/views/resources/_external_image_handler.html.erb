@@ -23,5 +23,6 @@
 <% model.external_image_url = [model.external_image_url] unless model.external_image_url.is_a? Array  %>
 <p>
   <%= f.label :external_image_url %><br />
-<div id="select_preview" style="min-width:66px;min-height:49px;border: 1px solid;padding:2px; float:left;"></div><%= f.select :external_image_url, [["No Image",""]] + model.external_image_url%>
+<div id="select_preview" style="min-width:66px;min-height:49px;border: 1px solid;padding:2px; float:left;"></div>
+<%= f.select :external_image_url, [["No Image",""]] + model.external_image_url, {} , :id=>"resource_external_image_url"%>
 </p>
