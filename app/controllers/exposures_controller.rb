@@ -9,7 +9,7 @@ class ExposuresController < ApplicationController
   end
   
   def show
-    @exposure = Exposure.find(params[:id], :include=> [:resource])
+    @exposure = Exposure.find(params[:id], :include=> [:resource], :order => "created_at DESC")
     respond_to do |format|
       format.html
       format.json{
