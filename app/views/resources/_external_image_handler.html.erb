@@ -2,7 +2,7 @@
   $(document).ready(function() {
     selected_image = $("#resource_external_image_url").val();
     if(selected_image != ""){
-      $("#select_preview").html("<img src='"+ selected_image +"'/>");
+      $("#select_preview").html("<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_170x170/"+ selected_image +"'/>");
     }else{
       $("#select_preview").html("");
     }
@@ -10,7 +10,7 @@
     $("#resource_external_image_url").change(function(){
       selected_image = $("#resource_external_image_url").val();
       if(selected_image != ""){
-        $("#select_preview").html("<img src='"+ selected_image +"'/>");
+        $("#select_preview").html("<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_170x170/"+ selected_image +"'/>");
       }else{
         $("#select_preview").html("");
       }
