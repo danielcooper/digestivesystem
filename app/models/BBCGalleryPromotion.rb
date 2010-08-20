@@ -1,3 +1,0 @@
-class BBCGalleryResource < Resource
-	
-end

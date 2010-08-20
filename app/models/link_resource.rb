@@ -1,0 +1,3 @@
+class LinkResource < Resource
+
+end

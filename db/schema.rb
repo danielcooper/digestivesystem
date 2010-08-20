@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20100819092732) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "external_image_url"
+    t.string   "pid"
     t.string   "artist_gid"
     t.string   "artist_name"
   end
@@ -35,6 +36,11 @@ ActiveRecord::Schema.define(:version => 20100819092732) do
   create_table "services", :force => true do |t|
     t.string   "name"
     t.string   "display_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shows", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
