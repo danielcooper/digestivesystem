@@ -17,7 +17,7 @@ class ContentTypes::Plugins::BBCEpisodeResource < ContentTypes::Base
 	end
 
 	def self.model
-		"BbcEpisodePromotion"
+		"BbcEpisodeResource"
 	end
 
 	def self.fetch_episode_information_for url

@@ -19,15 +19,15 @@ class ContentTypes::Plugins::LinkResource < ContentTypes::Base
 
   def attributes
     @attributes ||= begin
-      res = Net::HTTP.get(URI.parse(@url))
+			res = Net::HTTP.get(URI.parse(@url))
       doc = Hpricot.parse(res)
 			desc = doc.at("//meta[@name='description']")
 			blurb = desc["content"] if desc != nil
 			#Hpricot seems to have issues with this, so regexing
 			#imgsrc = doc.at("//link[@rel='image_src']")
 			#image = imgsrc["href"] if imgsrc != nil
-			image = /link rel="image_src" href="([^"]*)"/.match(res)
-			{:resource_url => @url, :type => self.class.model, :title => doc.at("title").inner_html, :blurb => blurb, :external_image_url => image.length > 0 ? image[1] : nil}
+			img = /link rel="image_src" href="([^"]*)"/.match(res)[1].gsub!(/http:\/\/open\.live\.bbc\.co\.uk\/dynamic_images\/[^\/]*\/(.*)/, 'http://\1')
+			{:resource_url => @url, :type => self.class.model, :title => doc.at("title").inner_html, :blurb => blurb, :external_image_url => img}
     end
   end
 

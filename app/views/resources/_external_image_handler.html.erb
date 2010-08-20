@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    selected_image = $("#resource_external_image_url").val();
+    if(selected_image != ""){
+      $("#select_preview").html("<img src='"+ selected_image +"'/>");
+    }else{
+      $("#select_preview").html("");
+    }
+
+    $("#resource_external_image_url").change(function(){
+      selected_image = $("#resource_external_image_url").val();
+      if(selected_image != ""){
+        $("#select_preview").html("<img src='"+ selected_image +"'/>");
+      }else{
+        $("#select_preview").html("");
+      }
+
+    });
+  });
+
+</script>
+<!-- TODO: MOVE THIS TO A PARTIAL ALL ON IT'S OWN -->
+<% model.external_image_url = [model.external_image_url] unless model.external_image_url.is_a? Array  %>
+<p>
+  <%= f.label :external_image_url %><br />
+<div id="select_preview" style="min-width:66px;min-height:49px;border: 1px solid;padding:2px; float:left;"></div><%= f.select :external_image_url, [["No Image",""]] + model.external_image_url%>
+</p>
