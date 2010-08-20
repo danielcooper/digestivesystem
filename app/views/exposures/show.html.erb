@@ -14,7 +14,8 @@
 </p>
 
 <p>
-  <%= link_to "Edit", edit_exposure_path(@exposure) %> |
-  <%= link_to "Destroy", @exposure, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", exposures_path %>
+  <strong>Resource:</strong>
+  <%=h @exposure.resource.title %>
 </p>
+
+

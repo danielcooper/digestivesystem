@@ -5,17 +5,19 @@
     <th>Birth</th>
     <th>Death</th>
     <th>Stream</th>
+    <th>Exposure</th>
   </tr>
   <% for exposure in @exposures %>
     <tr>
       <td><%=h exposure.birth %></td>
       <td><%=h exposure.death %></td>
-      <td><%=h exposure.stream_id %></td>
+      <td><%=h exposure.stream.display_name %></td>
+      <td><%= link_to exposure.resource.title, resource_path(exposure.resource)%>
       <td><%= link_to "Show", [@service,@stream,exposure] %></td>
-      <td><%= link_to "Edit", edit_exposure_path(exposure) %></td>
-      <td><%= link_to "Destroy", exposure, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Edit", edit_service_stream_exposure_path(@service,@stream,exposure) %></td>
+      <td><%= link_to "Destroy", [@service,@stream,exposure], :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to "New Exposure", new_exposure_path %></p>
+

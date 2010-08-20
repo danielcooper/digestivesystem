@@ -2,6 +2,8 @@
 
 <% form_for 'resource', @resource, :url => resources_path, :html => {:method => :post} do |f| %>
   <%= render :partial => 'form', :locals => { :f => f, :model => @resource } %>
+  <br clear="all" />
+  <p><%= f.submit %></p>
 <%end%>
 
 <p><%= link_to "Back to List", resources_path %></p>

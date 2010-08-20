@@ -17,11 +17,82 @@
   <%=h @resource.resource_url %>
 </p>
 <% if @resource.external_image_url != nil %>
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @resource.external_image_url, :alt => "#{@resource.title} Image" %>
-</p>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @resource.external_image_url, :alt => "#{@resource.title} Image" %>
+  </p>
 <% end %>
+
+<script>
+  service_list = <%=  @service_list %>
+
+  $(document).ready(function() {
+    $("#exposure_service_id").change(function(){
+      populate_streams_from_service();
+    });
+    populate_services();
+    populate_streams_from_service();
+  });
+
+
+  function populate_streams_from_service(){
+    output = [];
+    var selected_id = $('#exposure_service_id').val();
+    $.each(service_list, function(key, value){
+      if (value[0].service.name ==  selected_id){
+        $.each(value[1], function(key,value){
+          output.push('<option value="'+ value.stream.name +'">'+ value.stream.display_name +'</option>');
+        });
+      }
+    });
+    $('#exposure_stream_id').html(output.join(''));
+  }
+
+  function populate_services() {
+    output = []
+    $.each(service_list, function(key, value)
+    {
+      service = value[0].service;
+      output.push('<option value="'+ service.name +'">'+ service.display_name +'</option>');
+    });
+    $('#exposure_service_id').html(output.join(''));
+  }
+
+  
+</script>
+
+
+<h3>Expose This:</h3>
+<% form_for 'exposure', @exposure, :url => resource_exposures_path(@resource), :html => {:method => :post} do |f| %>
+
+  <p>Birth<br />
+    <%= datetime_select "exposure", "birth"%>
+  </p>
+
+  <p>Death<br />
+    <%= datetime_select "exposure", "death", :default => 2.days.from_now%>
+  </p>
+
+  <p>Service<br />
+    <select id="exposure_service_id" name="service_id">
+
+    </select>
+  </p>
+
+  <p>Stream<br />
+    <select id="exposure_stream_id" name="stream_id">
+
+    </select>
+  </p>
+
+
+
+  <%= f.hidden_field :resource_id, :value => @resource.id %>
+  <p><%= f.submit %></p>
+<%end%>
+
+
+
 
 <p>
   <%= link_to "Edit", edit_resource_path(@resource) %> |

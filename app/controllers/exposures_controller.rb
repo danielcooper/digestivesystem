@@ -4,7 +4,8 @@ class ExposuresController < ApplicationController
   before_filter :fetch_resource
   
   def index
-    @exposures = @stream.exposures
+    @exposures = @resource.exposures if @resource
+    @exposures = @stream.exposures if @stream
   end
   
   def show
@@ -19,6 +20,19 @@ class ExposuresController < ApplicationController
   
   def new
     @exposure = Exposure.new
+    if params[:url]
+      @provided_url = params[:url]
+      attributes = Resource.fetch_prefilled_attributes_for @provided_url
+      unless attributes.empty?
+        @resource = attributes[:type].constantize.new(attributes)
+      else
+        flash[:notice] = "We couldn't get any infomation from that url!"
+        @resource = Resource.new
+      end
+    else
+      flash[:notice] = "No URL specified."
+      @resource = Resource.new
+    end
   end
   
   def create
