@@ -16,7 +16,7 @@ class ResourcesController < ApplicationController
   def new
     if params[:url]
       @provided_url = params[:url]
-      attributes = fetch_prefilled_attributes_for @provided_url
+      attributes = Resource.fetch_prefilled_attributes_for @provided_url
       unless attributes.empty?
         @resource = attributes[:type].constantize.new(attributes)
       else
@@ -61,17 +61,6 @@ class ResourcesController < ApplicationController
   end
 
   protected
-
-  def fetch_prefilled_attributes_for url
-    attributes = {}
-    ContentTypes::PluginManager.instance.each do |n|
-      if n.can_handle_resource_type?(url)
-        attributes = n.new(url).attributes
-      end
-    end
-		attributes = ContentTypes::Plugins::LinkResource.new(url).attributes if attributes.empty? && URI.extract(url).length > 0
-    return attributes
-  end
 
   def load_plugins
     require "#{RAILS_ROOT}/lib/content_types/plugin_manager"
