@@ -9,14 +9,14 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   def fetch_service
-    @service = Service.find_by_name(params[:service_id])
+    @service = Service.find_by_name(params[:service_id]) if params[:service_id]
   end
 
   def fetch_stream
-    @stream = Stream.find_by_name(params[:stream_id])
+    @stream = Stream.find(:first, :conditions => {:name => params[:stream_id], :service_id => @service.id}) if  params[:stream_id] && params[:service_id]
   end
 
   def fetch_resource
-     @resource = Resource.find_by_name(params[:stream_id])
+     @resource = Resource.find(params[:resource_id]) if params[:resource_id]
   end
 end

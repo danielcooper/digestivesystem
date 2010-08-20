@@ -8,6 +8,9 @@ class ResourcesController < ApplicationController
   
   def show
     @resource = Resource.find(params[:id])
+    @exposure = Exposure.new
+
+    @service_list = Service.all.map {|n| [n, n.streams]}.to_json
   end
   
   def new

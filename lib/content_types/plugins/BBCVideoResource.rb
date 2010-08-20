@@ -19,7 +19,7 @@ class ContentTypes::Plugins::BBCVideoResource < ContentTypes::Base
 	end
 
 	def self.model
-		"BbcVideoPromotion"
+		"BbcVideoResource"
 	end
 
 	def self.fetch_episode_information_for url

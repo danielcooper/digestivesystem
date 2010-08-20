@@ -4,7 +4,8 @@ class ExposuresController < ApplicationController
   before_filter :fetch_resource
   
   def index
-    @exposures = @stream.exposures
+    @exposures = @resource.exposures if @resource
+    @exposures = @stream.exposures if @stream
   end
   
   def show

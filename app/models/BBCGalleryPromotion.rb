@@ -1,3 +1,3 @@
-class BBCGalleryPromotion < Promotion
+class BBCGalleryResource < Resource
 	
 end

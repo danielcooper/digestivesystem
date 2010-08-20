@@ -14,8 +14,7 @@ class StreamsController < ApplicationController
   end
   
   def create
-    @stream = Stream.new(params[:streams])
-    @stream.service = @service
+    @stream = Stream.new(params[:stream])
     if @stream.save
       flash[:notice] = "Successfully created streams."
       redirect_to [@service,@stream]
