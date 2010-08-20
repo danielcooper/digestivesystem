@@ -17,7 +17,6 @@ class StreamsController < ApplicationController
     @stream = Stream.new(params[:stream])
     if @stream.save
       flash[:notice] = "Successfully created streams."
-      Pusher[@service.url_key].trigger('rumble', {:duration => 10})
       redirect_to [@service,@stream]
     else
       render :action => 'new'
