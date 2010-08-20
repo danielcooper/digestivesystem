@@ -2,3 +2,4 @@ rails -v 2.3.8
 hpricot
 simple-rss
 factory_girl
+pusher
