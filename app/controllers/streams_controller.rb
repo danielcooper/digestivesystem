@@ -6,7 +6,7 @@ class StreamsController < ApplicationController
   end
   
   def show
-    @stream = Stream.find_by_name(params[:id])
+    @stream = Stream.find_by_name(params[:id], :order => "id DESC")
   end
   
   def new
