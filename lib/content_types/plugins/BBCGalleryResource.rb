@@ -33,7 +33,7 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
 		#res.gsub!(/\},[^\]\{]*\]/, "} ]")
 		@gallery_data = JSON.parse(res)
 		@pid = @gallery_data["gallery"]["brand_pid"]
-		@gallery_images = @gallery_data["gallery"]["photos"].length == 1  ? @gallery_data["gallery"]["photos"][1]["image_square"] : @gallery_data["gallery"]["photos"].map{ |photo| photo["image_square"]}
+		@gallery_images = @gallery_data["gallery"]["photos"].length == 1  ? @gallery_data["gallery"]["photos"][1]["image_square"] : @gallery_data["gallery"]["photos"].map{ |photo| photo["image_full"]}
 		@gallery_data
 	end
 

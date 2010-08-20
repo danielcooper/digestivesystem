@@ -9,6 +9,9 @@
     <tr>
       <td><%=h service.name %></td>
       <td><%=h service.display_name %></td>
+	  <td><%=h service.url %></td>
+	  <td><%=h service.schedule %></td>
+	  <td><%=h service.background_image %></td>
       <td><%= link_to "Show", service %></td>
       <td><%= link_to "Edit", edit_service_path(service) %></td>
       <td><%= link_to "Destroy", service, :confirm => 'Are you sure?', :method => :delete %></td>

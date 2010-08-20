@@ -8,6 +8,20 @@
   <strong>Display Name:</strong>
   <%=h @service.display_name %>
 </p>
+<p>
+  <strong>Service URL:</strong>
+  <%=h @service.url %>
+</p>
+<p>
+  <strong>Schedule URL:</strong>
+  <%=h @service.schedule %>
+</p>
+<p>
+  <strong>Background Image URL:</strong>
+  <%=h @service.background_image %>
+</p>
+
+
 
 <p>
   <%= link_to "Edit", edit_service_path(@service) %> |
