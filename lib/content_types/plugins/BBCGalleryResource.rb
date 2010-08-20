@@ -29,8 +29,8 @@ class ContentTypes::Plugins::BBCGalleryResource < ContentTypes::Base
 
 	def fetch_gallery_information
 		res = Net::HTTP.get(URI.parse("#{@gallery_base}#{@gallery_brand}/#{@gallery_id}.json"))
-    res.gsub!(/,[^}"\]]*\}/, "}")
-		res.gsub!(/\},[^\]\{]*\]/, "} ]")
+    #res.gsub!(/,[^}"\]]*\}/, "}")
+		#res.gsub!(/\},[^\]\{]*\]/, "} ]")
 		@gallery_data = JSON.parse(res)
 		@pid = @gallery_data["gallery"]["brand_pid"]
 		@gallery_images = @gallery_data["gallery"]["photos"].length == 1  ? @gallery_data["gallery"]["photos"][1]["image_square"] : @gallery_data["gallery"]["photos"].map{ |photo| photo["image_square"]}

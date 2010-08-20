@@ -1,3 +1,0 @@
-class BBCGalleryPromotion < Promotion
-	
-end
