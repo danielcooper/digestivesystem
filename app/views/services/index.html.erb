@@ -1,25 +1,5 @@
-<% title "Services" %>
+<% title "Select your sevice" %>
 
-<table>
-  <tr>
-    <th>Display Name</th>
-    <th>Key</th>
-	<th>URL</th>
-	<th>Schedule URL</th>
-	<th>Image URL</th>
-  </tr>
-  <% for service in @services %>
-    <tr>
-	  <td><%=h service.display_name %></td>
-      <td><%=h service.name %></td>
-	  <td><%=h service.url %></td>
-	  <td><%=h service.schedule %></td>
-	  <td><%=h service.background_image %></td>
-      <td><%= link_to "Show", service %></td>
-      <td><%= link_to "Edit", edit_service_path(service) %></td>
-      <td><%= link_to "Destroy", service, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
-<p><%= link_to "New Service", new_service_path %></p>
+<%  for service in @services %>
+  <%= link_to (image_tag service.logo), service%>
+<%end%>

@@ -13,5 +13,10 @@ class Service < ActiveRecord::Base
   def to_param
     name
   end
+
+
+  def logo
+    "/images/#{name}_logo.png"
+  end
   
 end

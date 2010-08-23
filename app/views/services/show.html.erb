@@ -1,30 +1,11 @@
-<% title "Service" %>
-
-<p>
-  <strong>Name:</strong>
-  <%=h @service.name %>
-</p>
-<p>
-  <strong>Display Name:</strong>
-  <%=h @service.display_name %>
-</p>
-<p>
-  <strong>Service URL:</strong>
-  <%=h @service.url %>
-</p>
-<p>
-  <strong>Schedule URL:</strong>
-  <%=h @service.schedule %>
-</p>
-<p>
-  <strong>Background Image URL:</strong>
-  <%=h @service.background_image %>
-</p>
+<% title "Viewing #{@service.display_name} details" %>
 
 
+<%= link_to "Create New Promotion", new_service_promotion_path(@service) %> |
+<a href="javascript:location.href='http://digestivesystem.heroku.com/services/radio1/promotions/new?url='+encodeURIComponent(%20location.href%20)">
+  Bookmarklet for <%=@service.display_name %>
+</a>
 
-<p>
-  <%= link_to "Edit", edit_service_path(@service) %> |
-  <%= link_to "Destroy", @service, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", services_path %>
-</p>
+
+<p><strong>Available streams</strong>: <%=  @service.streams.map{|n| link_to(n.display_name, service_stream_path(@service, n))}.to_sentence %> </p>
+<p><strong>Most recent exposure</strong>: <%=  @service.exposures.empty? ? "No exposures recently" : @service.exposures.last.admin_description %> </p>

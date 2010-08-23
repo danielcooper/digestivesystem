@@ -2,8 +2,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => 'dashboard', :action => 'show'
 
-  map.resource :dashboard
-
 	map.resources :resources do |resources|
     resources.resources  :exposures
   end

@@ -7,6 +7,7 @@ class ServicesController < ApplicationController
   
   def show
     @service = Service.find_by_name(params[:id])
+    @service.exposures
   end
   
   def new
