@@ -4,11 +4,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :dashboard
 
-  map.resources :resources do |resources|
+	map.resources :resources do |resources|
     resources.resources  :exposures
   end
-
+	
   map.resources :services do |resources|
+		resources.resources :promotions
     resources.resources  :streams do |streams|
       streams.resources :exposures
     end

@@ -7,6 +7,7 @@ class Service < ActiveRecord::Base
   validates_uniqueness_of :name
 
   has_many :streams
+	has_many :exposures, :through => :streams
 
   
   def to_param
