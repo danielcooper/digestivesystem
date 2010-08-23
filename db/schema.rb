@@ -12,48 +12,48 @@
 ActiveRecord::Schema.define(:version => 20100820145934) do
 
   create_table "exposures", :force => true do |t|
-    t.datetime "birth"
-    t.datetime "death"
-    t.integer  "stream_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "resource_id"
+    t.timestamp "birth"
+    t.timestamp "death"
+    t.integer   "stream_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "resource_id"
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "type"
-    t.string   "title"
-    t.text     "blurb"
-    t.string   "resource_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "external_image_url"
-    t.string   "pid"
-    t.string   "artist_gid"
-    t.string   "artist_name"
+    t.string    "type"
+    t.string    "title"
+    t.text      "blurb"
+    t.string    "resource_url"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "external_image_url"
+    t.string    "pid"
+    t.string    "artist_gid"
+    t.string    "artist_name"
   end
 
   create_table "services", :force => true do |t|
-    t.string   "name"
-    t.string   "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "url"
-    t.string   "schedule"
-    t.string   "background_image"
+    t.string    "name"
+    t.string    "display_name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "url"
+    t.string    "schedule"
+    t.string    "background_image"
   end
 
   create_table "shows", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "streams", :force => true do |t|
-    t.string   "name"
-    t.string   "display_name"
-    t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.string    "display_name"
+    t.integer   "service_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
 end

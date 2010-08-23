@@ -10,7 +10,7 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <div style=" overflow:auto; width: 75%; margin-left:auto; margin-right: auto; "><img src="/images/bbc.png" style="float: left; width: 50%" /><div style="float: right; width: 50%"><img src="http://www.bbc.co.uk/radio1/images/logo120x60.gif" /><!--<%=h @service.display_name if @service && @service.display_name%>--></div></div>
+    <div style=" overflow:auto; width: 75%; margin-left:auto; margin-right: auto; "><div style="float: left; width: 50%"><img src="/images/bbc.png" /></div><div style="float: right; width: 50%, text-align: right;"><%= "<img src=\"#{@service.background_image}\" alt=\"#{@service.display_name}\">" if @service && @service.background_image%></div></div>
     <div id="container">
       <a style="float:right; background: white; border: 1px;" href="
          javascript:location.href='http://digestivesystem.heroku.com/services/radio1/streams/live/exposures/new?url='+encodeURIComponent(%20location.href%20)

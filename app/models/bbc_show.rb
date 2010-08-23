@@ -24,6 +24,7 @@ class BbcShow
 	end
 	
 	def self.get_schedule time, service
+		puts "#{Service.find_by_name(service).schedule}/#{time.year}/#{time.month}/#{time.day}.json"
     @schedule_data = parse_json("#{Service.find_by_name(service).schedule}/#{time.year}/#{time.month}/#{time.day}.json")["schedule"]["day"]["broadcasts"]
 	end
 

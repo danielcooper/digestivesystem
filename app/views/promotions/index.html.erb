@@ -2,22 +2,21 @@
 
 <table>
   <tr>
-    <th>Type</th>
-    <th>Title</th>
-    <th>Blurb</th>
-    <th>Resource Url</th>
+    <th>Birth</th>
+    <th>Death</th>
+    <th>Stream</th>
+    <th>Exposure</th>
   </tr>
-  <% for promotion in @promotions %>
+  <% for exposure in @promotions %>
     <tr>
-      <td><%=h promotion.type %></td>
-      <td><%=h promotion.title %></td>
-      <td><%=h promotion.blurb %></td>
-      <td><%=h promotion.resource_url %></td>
-      <td><%= link_to "Show", promotion_path(promotion) %></td>
-      <td><%= link_to "Edit", edit_promotion_path(promotion) %></td>
-      <td><%= link_to "Destroy", promotion_path(promotion), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%=h exposure.birth %></td>
+      <td><%=h exposure.death %></td>
+      <td><%=h exposure.stream.display_name %></td>
+      <td><%= link_to exposure.resource.title, resource_path(exposure.resource)%>
+      <td><%= link_to "Show", [@service,exposure.stream,exposure] %></td>
+      <td><%= link_to "Edit", edit_service_stream_exposure_path(@service,exposure.stream,exposure) %></td>
+      <td><%= link_to "Destroy", [@service,exposure.stream,exposure], :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
-
-<p><%= link_to "New Promotion", new_promotion_path %></p>
+<p><%= link_to "New Promotion", new_service_promotion_path(@service) %></p>
