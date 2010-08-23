@@ -39,7 +39,7 @@ class ExposuresController < ApplicationController
     @exposure = Exposure.new(params[:exposure])
     @exposure.stream = @stream
     if @exposure.save
-      Pusher[@service.name].trigger('rumble', {:duration => 10})
+      Pusher["#{@service.name}-#{@stream.name}"].trigger("added_exposure", @exposure.to_json)
       flash[:notice] = "Successfully created exposure."
       redirect_to [@service,@stream,@exposure]
     else
