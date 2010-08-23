@@ -24,8 +24,7 @@ class BbcShow
 	end
 	
 	def self.get_schedule time, service
-		(schedule = {"radio1" => "http://www.bbc.co.uk/radio1/programmes/schedules/england", "1xtra" => "http://www.bbc.co.uk/1xtra/programmes/schedules"}).default = schedule["radio1"]
-    @schedule_data = parse_json("#{schedule[service]}/#{time.year}/#{time.month}/#{time.day}.json").schedule.day.broadcasts["day"]["broadcasts"]
+    @schedule_data = parse_json("#{Service.find_by_name(service).schedule}/#{time.year}/#{time.month}/#{time.day}.json")["schedule"]["day"]["broadcasts"]
 	end
 
 	def self.parse_json url
