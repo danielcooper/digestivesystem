@@ -9,16 +9,56 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-
+        <script src="/javascripts/jquery.js" type="text/javascript"></script>
         <script src="http://js.pusherapp.com/1.6/pusher.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             // Create a Pusher server object with your app's key
             var server = new Pusher('c0b0df1d1c0885f4eb42', 'radio1-live');
+
+            var updateWithNewItem = function (data_item){
+                timeline = $('#timeline').prepend(fetchDataFromObject(data_item));
+            };
+
+            var fetchDataFromObject = function(data){
+                if (data.bbc_newsbeat_resource) return newsbeatHtml(data.bbc_newsbeat_resource)
+                if (data.bbc_track_resource) return trackHtml(data.bbc_track_resource)
+            };
+            
+            var newsbeatHtml = function (data){
+                img = ""
+                if(data.external_image_url){
+                    img =  "<img src=' " + data.external_image_url + "' /> "
+                }
+                return "<div> Newsbeat Post: " + img + data.title + "</div>"
+            };
+
+            var trackHtml = function (data){
+                img = ""
+                if(data.external_image_url){
+                    img =  "<img src=' " + data.external_image_url + "' /> "
+                }
+                return "<div> Track: " + img + data.title + " by " + data.artist_name + "</div>"
+            };
+
+            
+
+
+
+
             // Bind to server events
-            server.bind('radio1-live', function(data) {
-                alert(data);
-            })
+            server.bind('added_exposure', function(data) {
+                updateWithNewItem(data);
+            });
+
+            
+
+            $(document).ready(function() {
+
+                
+
+            });
         </script>
-        Wait for it...
+        <div id="timeline">
+        </div>
     </body>
 </html>

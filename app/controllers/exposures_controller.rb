@@ -4,8 +4,14 @@ class ExposuresController < ApplicationController
   before_filter :fetch_resource
   
   def index
-    @exposures = @resource.exposures if @resource
-    @exposures = @stream.exposures if @stream
+    @exposures = @resource.exposures.sort_by { |exposure| -exposure.created_at.to_i } if @resource
+    @exposures = @stream.exposures.sort_by { |exposure| -exposure.created_at.to_i }  if @stream
+    respond_to do |format|
+      format.html
+      format.json{
+        render :json => "{\"exposures\":[#{@exposures.map{|e| e.to_json }.join(",")}]}"
+      }
+    end
   end
   
   def show
