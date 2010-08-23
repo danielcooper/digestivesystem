@@ -1,7 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
 
-  
-  map.root :controller => "resources", :action => "index"
 
   map.resources :resources do |resources|
     resources.resources  :exposures

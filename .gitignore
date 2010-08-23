@@ -2,3 +2,4 @@
 *.sqlite3
 /nbproject
 /db/schema.rb
+/db/development.sqlite3
