@@ -15,4 +15,8 @@ class Exposure < ActiveRecord::Base
     resource.to_json
   end
 
+  def admin_description
+    "TODO:IMPLEMENT ME!"
+  end
+
 end

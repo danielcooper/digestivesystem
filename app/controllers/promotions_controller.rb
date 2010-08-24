@@ -36,6 +36,8 @@ class PromotionsController < ApplicationController
   end
   
   def create
+    exposures = params[:exposures]
+
     @exposure = Exposure.new(params[:exposure])
     @exposure.stream = @stream
     if @exposure.save

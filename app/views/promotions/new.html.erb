@@ -1,7 +1,38 @@
 <% title "New Promotion" %>
 
 <% form_for 'promotion', @resource, :url => service_promotions_path, :html => {:method => :post} do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f, :model => @resource } %>
+
+  <div id="promotion" class="container_panel">
+    <div class="collapse_panel_header">
+      <div class="header_content">Resource</div>
+      <div class="arrow_expand"></div>
+    </div>
+    <div id="dvContent" class="content" style="display:none">
+      <p><strong>Title:</strong> <%=@resource.title%></p>
+      <p><strong>Blurb:</strong> <%=@resource.blurb%></p>
+      <p><strong>URL:</strong> <%= @url ? "No URL found" : @resource.resource_url  %></p>
+      <%= f.error_messages %>
+        <%= f.hidden_field :type, :value => @resource.type %>
+        <%= f.hidden_field :title,:value => @resource.title %>
+        <%= f.hidden_field :blurb, :value => @resource.blurb %>
+        <%= f.hidden_field :resource_url, :value => @resource.resource_url if @url %>
+
+    </div>
+  </div>
+<br/>
+<div id="promotion" class="container_panel">
+    <div class="collapse_panel_header">
+      <div class="header_content">Exposures</div>
+      <div class="arrow_expand"></div>
+    </div>
+    <div id="dvContent" class="content" style="display:none">
+    </div>
+</div>
+
+  <% if @resource.external_image_url != nil %>
+    <%= render :partial => '/promotions/external_image_handler', :locals => { :f => f , :model => @resource} rescue ""%>
+  <%end%>
+
   <br clear="all" />
   <p><%= f.submit %></p>
 <%end%>

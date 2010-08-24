@@ -1,2 +1,12 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(document).ready(function() {
+
+    $("DIV.container_panel > DIV.collapse_panel_header > DIV.arrow_expand").toggle(
+        function() {
+            $(this).parent().next("div.content").show("slow");
+            $(this).attr("class", "arrow_close");
+        },
+        function() {
+            $(this).parent().next("div.content").hide("slow")
+            $(this).attr("class", "arrow_expand");
+        });
+});

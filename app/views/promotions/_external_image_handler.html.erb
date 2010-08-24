@@ -2,10 +2,12 @@
   $(document).ready(function() {
     selected_image = $("#resource_external_image_url").val();
     if(selected_image != ""){
+
       $("#small_image").attr('src', selected_image);
 	  $("#medium_image").attr('src', selected_image);
 	  $("#large_image").attr('src', selected_image);
     }else{
+
       $("#small_image").attr('src', "");
 	  $("#medium_image").attr('src', "");
 	  $("#large_image").attr('src', "");
@@ -24,6 +26,15 @@
 	  }
 
     });
+
+	$("#promotion_title").change(function(){
+	  $(".title_overlay").html($("#promotion_title").val());
+	});
+
+	$("#promotion_blurb").change(function(){
+	  $(".box_blurb").html($("#promotion_blurb").val());
+	});
+	  
   });
 
 </script>
@@ -33,8 +44,9 @@
   <%= f.label :external_image_url %><br />
 <div class="front_box image_preview small_box small_image_preview" ><img id ="small_image" src="" width = '74' height = '74'/></div>
 <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
-<div class="front_box image_preview large_box"><img id="large_image" src="" width = '320' height = '320'/><div class="box_div"><h1 class="box_overlay title_overlay">Greg James</h1>
-	<div class="clear"></div><h3 class="box_overlay box_blurb" >Catch up with Greg!</h3></div></div>
+<div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h model.title %></h1>
+	<div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h model.blurb %></h3></div></div>
+
 
 <%= f.select :external_image_url, [["No Image",""]] + model.external_image_url, {} , :id=>"resource_external_image_url"%>
 </p>
