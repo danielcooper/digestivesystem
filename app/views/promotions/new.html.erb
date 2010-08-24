@@ -1,0 +1,9 @@
+<% title "New Promotion" %>
+
+<% form_for 'promotion', @resource, :url => service_promotions_path, :html => {:method => :post} do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f, :model => @resource } %>
+  <br clear="all" />
+  <p><%= f.submit %></p>
+<%end%>
+
+<p><%= link_to "Back to List", service_promotions_path %></p>

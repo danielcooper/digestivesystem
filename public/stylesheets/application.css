@@ -79,3 +79,53 @@ a {
   font-size: 12px;
   list-style: disc;
 }
+
+.front_box {
+	border: 1px solid;
+	padding:2px;
+}
+
+.image_preview{
+	margin-right: 20px;
+	float:left;
+}
+
+.small_box {
+	width:74px;
+	height:74px;
+}
+
+.small_image_preview {
+	margin-top: 246px;
+}
+
+.medium_box {
+	width:156px;
+	height:156px;
+}
+
+.medium_image_preview {
+	margin-top: 164px;
+}
+
+.large_box {
+	width: 320px;
+	height: 320px;
+}
+
+.box_overlay {
+	margin:0px;
+	float:right;
+	text-align: right;
+	position: relative;
+	top: 50%;
+	background-color: rgba(0,0,0,0.75);
+	color:white;
+	font-family:Arial;
+}
+
+.title_overlay {
+	margin-bottom: 5px;
+}
+
+

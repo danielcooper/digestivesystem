@@ -22,12 +22,13 @@ class ContentTypes::Plugins::BBCNewsbeatResource < ContentTypes::Base
       doc = Hpricot.parse(res)
 
       output = {:resource_url => @url, :type => self.class.model}
-      targeted_tags = [["Headline",:title],["Description",:blurb],["THUMBNAIL_URL",:external_image_url]]
+      targeted_tags = [["Headline",:title],["Description",:blurb]]
       doc.search("//meta").each do |meta_tag|
         targeted_tags.each do |target|
             output[target.last] = meta_tag.attributes["content"] if target.first == meta_tag.attributes["name"]
         end
       end
+			output["external_image_url"] = doc.at("//span[@class='caption full-width']").search("img").first.attributes['src']
       output
     end
   end
