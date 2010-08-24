@@ -2,12 +2,12 @@
   $(document).ready(function() {
     selected_image = $("#resource_external_image_url").val();
     if(selected_image != ""){
-	  /*$(".box_div").css('margin-top', '-50%')*/
+
       $("#small_image").attr('src', selected_image);
 	  $("#medium_image").attr('src', selected_image);
 	  $("#large_image").attr('src', selected_image);
     }else{
-	  /*$(".box_div").css('margin-top', '50%')*/
+
       $("#small_image").attr('src', "");
 	  $("#medium_image").attr('src', "");
 	  $("#large_image").attr('src', "");
@@ -16,17 +16,14 @@
     $("#resource_external_image_url").change(function(){
       selected_image = $("#resource_external_image_url").val();
       if(selected_image != ""){
-		/*$(".box_div").css('margin-top', '-50%')*/
 		$("#small_image").attr('src', selected_image);
 		$("#medium_image").attr('src', selected_image);
 		$("#large_image").attr('src', selected_image);
 	  }else{
-		/*$(".box_div").css('margin-top', '50%')*/
 		$("#small_image").attr('src', "");
 		$("#medium_image").attr('src', "");
 		$("#large_image").attr('src', "");
 	  }
-
 
     });
 
@@ -41,6 +38,7 @@
   });
 
 </script>
+<!-- TODO: MOVE THIS TO A PARTIAL ALL ON IT'S OWN -->
 <% model.external_image_url = [model.external_image_url] unless model.external_image_url.is_a? Array  %>
 <p>
   <%= f.label :external_image_url %><br />
@@ -48,6 +46,7 @@
 <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
 <div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h model.title %></h1>
 	<div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h model.blurb %></h3></div></div>
+
 
 <%= f.select :external_image_url, [["No Image",""]] + model.external_image_url, {} , :id=>"resource_external_image_url"%>
 </p>

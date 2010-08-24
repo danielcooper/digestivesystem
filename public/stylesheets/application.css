@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   background-color: #CDCDCD;
   font-family: Verdana, Helvetica, Arial;
@@ -145,3 +146,147 @@ a {
 }
 
 
+=======
+body {
+  background-color: #CDCDCD;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+}
+
+a img {
+  border: none;
+}
+
+a {
+  color: #0000FF;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
+
+.front_box {
+	border: 1px solid;
+	padding:2px;
+}
+
+.front_box img {
+	z-index: 0
+}
+
+.image_preview{
+	margin-right: 20px;
+	float:left;
+}
+
+.small_box {
+	width:74px;
+	height:74px;
+}
+
+.small_image_preview {
+	margin-top: 246px;
+}
+
+.medium_box {
+	width:156px;
+	height:156px;
+}
+
+.medium_image_preview {
+	margin-top: 164px;
+}
+
+.large_box {
+	width: 320px;
+	height: 320px;
+}
+
+.box_overlay {
+	margin-top: 0px;
+	float:right;
+	text-align: right;
+	position: relative;
+	background-color: rgba(0,0,0,0.75);
+	color:white;
+	font-family:Arial;
+	z-index: 1;
+}
+
+.box_blurb {
+	float: right;
+}
+
+.box_div {
+	margin-top:-50%;
+	overflow: auto;
+}
+
+.title_overlay {
+	margin-bottom: 5px;
+}
+>>>>>>> 4c0bc2216c21e71df3fddff9486e674d264e175f
