@@ -85,6 +85,10 @@ a {
 	padding:2px;
 }
 
+.front_box img {
+	z-index: 0
+}
+
 .image_preview{
 	margin-right: 20px;
 	float:left;
@@ -114,18 +118,25 @@ a {
 }
 
 .box_overlay {
-	margin:0px;
+	margin-top: 0px;
 	float:right;
 	text-align: right;
 	position: relative;
-	top: 50%;
 	background-color: rgba(0,0,0,0.75);
 	color:white;
 	font-family:Arial;
+	z-index: 1;
+}
+
+.box_blurb {
+	float: right;
+}
+
+.box_div {
+	margin-top:-50%;
+	overflow: auto;
 }
 
 .title_overlay {
 	margin-bottom: 5px;
 }
-
-
