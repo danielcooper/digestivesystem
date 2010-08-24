@@ -1,142 +1,190 @@
 body {
-  background-color: #CDCDCD;
-  font-family: Verdana, Helvetica, Arial;
-  font-size: 14px;
+    background-color: #CDCDCD;
+    font-family: Verdana, Helvetica, Arial;
+    font-size: 14px;
 }
 
 a img {
-  border: none;
+    border: none;
 }
 
 a {
-  color: #0000FF;
+    color: #0000FF;
 }
 
 .clear {
-  clear: both;
-  height: 0;
-  overflow: hidden;
+    clear: both;
+    height: 0;
+    overflow: hidden;
 }
 
 #container {
-  width: 75%;
-  margin: 0 auto;
-  background-color: #FFF;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
+    width: 75%;
+    margin: 0 auto;
+    background-color: #FFF;
+    padding: 20px 40px;
+    border: solid 1px black;
+    margin-top: 20px;
 }
 
 #flash_notice, #flash_error {
-  padding: 5px 8px;
-  margin: 10px 0;
+    padding: 5px 8px;
+    margin: 10px 0;
 }
 
 #flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
+    background-color: #CFC;
+    border: solid 1px #6C6;
 }
 
 #flash_error {
-  background-color: #FCC;
-  border: solid 1px #C66;
+    background-color: #FCC;
+    border: solid 1px #C66;
 }
 
 .fieldWithErrors {
-  display: inline;
+    display: inline;
 }
 
 #errorExplanation {
-  width: 400px;
-  border: 2px solid #CF0000;
-  padding: 0px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+    width: 400px;
+    border: 2px solid #CF0000;
+    padding: 0px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
 }
 
 #errorExplanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: 0;
-  background-color: #c00;
-  color: #fff;
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: 0;
+    background-color: #c00;
+    color: #fff;
 }
 
 #errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 8px;
+    color: #333;
+    margin-bottom: 0;
+    padding: 8px;
 }
 
 #errorExplanation ul {
-  margin: 2px 24px;
+    margin: 2px 24px;
 }
 
 #errorExplanation ul li {
-  font-size: 12px;
-  list-style: disc;
+    font-size: 12px;
+    list-style: disc;
 }
 
 .front_box {
-	border: 1px solid;
-	padding:2px;
+    border: 1px solid;
+    padding:2px;
 }
 
 .front_box img {
-	z-index: 0
+    z-index: 0
 }
 
 .image_preview{
-	margin-right: 20px;
-	float:left;
+    margin-right: 20px;
+    float:left;
 }
 
 .small_box {
-	width:74px;
-	height:74px;
+    width:74px;
+    height:74px;
 }
 
 .small_image_preview {
-	margin-top: 246px;
+    margin-top: 246px;
 }
 
 .medium_box {
-	width:156px;
-	height:156px;
+    width:156px;
+    height:156px;
 }
 
 .medium_image_preview {
-	margin-top: 164px;
+    margin-top: 164px;
 }
 
 .large_box {
-	width: 320px;
-	height: 320px;
+    width: 320px;
+    height: 320px;
 }
 
 .box_overlay {
-	margin-top: 0px;
-	float:right;
-	text-align: right;
-	position: relative;
-	background-color: rgba(0,0,0,0.75);
-	color:white;
-	font-family:Arial;
-	z-index: 1;
+    margin-top: 0px;
+    float:right;
+    text-align: right;
+    position: relative;
+    background-color: rgba(0,0,0,0.75);
+    color:white;
+    font-family:Arial;
+    z-index: 1;
 }
 
 .box_blurb {
-	float: right;
+    float: right;
 }
 
 .box_div {
-	margin-top:-50%;
-	overflow: auto;
+    margin-top:-50%;
+    overflow: auto;
 }
 
 .title_overlay {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
+
+.content{
+    padding-left:20px;
+}
+
+.container_panel{
+    
+}
+
+.collapse_panel_header{
+    height:30px;
+    background-color: #CDCDCD;
+    color:#FFF;
+    font-weight:bold;
+}
+
+.header_content{
+    float:left;
+    padding-left:5px;
+}
+
+.arrow_expand{
+    background-image: url(/images/icons/arrow_down.png);
+    width:13px;
+    height:15px;
+    float:right;
+    margin-top:7px;
+    margin-right:5px;
+}
+
+.arrow_expand:hover{
+    cursor:hand;
+}
+
+.arrow_close{
+    background-image: url(/images/icons/arrow_up.png);
+    width:13px;
+    height:15px;
+    float:right;
+    margin-top:7px;
+    margin-right:5px;
+}
+
+.arrow_close:hover{
+    cursor:hand;
+}
+
+
