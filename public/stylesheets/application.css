@@ -83,10 +83,11 @@ a {
 .front_box {
 	border: 1px solid;
 	padding:2px;
+	position: relative;
 }
 
 .front_box img {
-	z-index: 0
+	position: relative;
 }
 
 .image_preview{
@@ -129,12 +130,14 @@ a {
 }
 
 .box_blurb {
-	float: right;
+	margin: 0;
 }
 
 .box_div {
-	margin-top:-50%;
-	overflow: auto;
+	overflow: hidden;
+	position: absolute;
+	top: 50%;
+	right: 2px;
 }
 
 .title_overlay {
