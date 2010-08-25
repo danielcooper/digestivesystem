@@ -30,7 +30,7 @@ class ResourcesController < ApplicationController
   end
   
   def create
-    @resource = params[:resource][:type].constantize.new(params[:resource])
+    @resource = params[:resource].delete(:type).constantize.new(params[:resource])
     if @resource.save
       flash[:notice] = "Successfully created resource."
       redirect_to resource_path(@resource)

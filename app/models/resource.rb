@@ -18,10 +18,15 @@ class Resource < ActiveRecord::Base
 
 
   def json_attributes
-    [:title, :blurb, :external_image_url, :resource_url]
+    [:resource_url, :type]
   end
 
 
+  def export_hash
+    attributes.delete_if{|key,value| json_attributes.include?(key.to_sym) != true}
+  end
+
+  
   def to_json
     super(:only => json_attributes)
   end
