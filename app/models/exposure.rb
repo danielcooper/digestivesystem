@@ -11,8 +11,12 @@ class Exposure < ActiveRecord::Base
  
   validates_presence_of :stream_id
 
+  def json_attributes
+    [:blurb,:title,:image,:name]
+  end
+
   def to_json
-    resource.to_json
+    resource.export_hash.merge(attributes.delete_if{|key,value| json_attributes.include?(key.to_sym) != true})
   end
 
   def admin_description

@@ -8,16 +8,6 @@ class PromotionsController < ApplicationController
 
   end
   
-  def show
-    @exposure = Exposure.find(params[:id], :include=> [:resource])
-    respond_to do |format|
-      format.html
-      format.json{
-        render :json => @exposure.to_json
-      }
-    end
-  end
-  
   def new
     @exposure = Exposure.new
     if params[:url]
@@ -36,37 +26,28 @@ class PromotionsController < ApplicationController
   end
   
   def create
-    exposures = params[:exposures]
+    streams = @service.streams
+    stream_types = streams.map {|n| n.name}
 
-    @exposure = Exposure.new(params[:exposure])
-    @exposure.stream = @stream
-    if @exposure.save
-      Pusher[@service.name].trigger('rumble', {:duration => 10})
+    resource = params[:promotion].delete(:type).constantize.create(params[:promotion]) #save resource (todo: save or load)
+
+    if params[:selected_exposures]
+      params[:selected_exposures].each do |key,value|
+        if stream_types.include? key
+          exposure_attributes = params[:selected_exposures][key].merge(params[:exposures_template]).delete_if {|k, v| k == "active" }
+          stream = streams.select{|n| n.name == key}.first
+          exposure_attributes[:stream_id] = stream.id
+          exposure_attributes[:resource_id] = resource.id
+          exposure = Exposure.create exposure_attributes
+          Pusher["#{@service.name}-#{stream.name}"].trigger("added_exposure", exposure.to_json)
+        end
+      end
+      
       flash[:notice] = "Successfully created exposure."
       redirect_to [@service,@stream,@exposure]
-    else
-      render :action => 'new'
+      
     end
   end
   
-  def edit
-    @exposure = Exposure.find(params[:id])
-  end
-  
-  def update
-    @exposure = Exposure.find(params[:id])
-    if @exposure.update_attributes(params[:exposure])
-      flash[:notice] = "Successfully updated exposure."
-      redirect_to @exposure
-    else
-      render :action => 'edit'
-    end
-  end
-  
-  def destroy
-    @exposure = Exposure.find(params[:id])
-    @exposure.destroy
-    flash[:notice] = "Successfully destroyed exposure."
-    redirect_to exposures_url
-  end
 end
+
