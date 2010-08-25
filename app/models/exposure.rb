@@ -24,9 +24,9 @@ class Exposure < ActiveRecord::Base
   end
 
   def before_create
-    attribute["blurb"] = resource.blurb if attribute["blurb"].blank?
-    attribute["image"] = resource.exturnal_image_url unless attribute["image"].blank?
-    attribute["title"] = resource.title unless attribute["title"].blank?
+    attributes["blurb"] = resource.blurb if attributes["blurb"].blank?
+    attributes["image"] = resource.exturnal_image_url unless attributes["image"].blank?
+    attributes["title"] = resource.title unless attributes["title"].blank?
   end
 
 end
