@@ -24,9 +24,9 @@ class Exposure < ActiveRecord::Base
   end
 
   def after_create
-    attributes["blurb"] = resource.blurb if attributes["blurb"].blank?
-    attributes["image"] = resource.external_image_url if attributes["image"].blank?
-    attributes["title"] = resource.title if attributes["title"].blank?
+    self.blurb = resource.blurb if self.blurb.blank?
+    self.image = resource.external_image_url if self.image.blank?
+    self.title = resource.title if self.title.blank?
     self.save
   end
 
