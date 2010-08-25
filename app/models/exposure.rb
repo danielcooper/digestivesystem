@@ -23,4 +23,10 @@ class Exposure < ActiveRecord::Base
     "TODO:IMPLEMENT ME!"
   end
 
+  def before_create
+    attribute["blurb"] = resource.blurb if attribute["blurb"].blank?
+    attribute["image"] = resource.exturnal_image_url unless attribute["image"].blank?
+    attribute["title"] = resource.title unless attribute["title"].blank?
+  end
+
 end
