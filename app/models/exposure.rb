@@ -15,4 +15,8 @@ class Exposure < ActiveRecord::Base
     resource.to_json
   end
 
+	def admin_description
+		"DEFINE ME"
+	end
+
 end
