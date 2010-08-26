@@ -45,7 +45,7 @@ class Resource < ActiveRecord::Base
         attributes = n.new(url).attributes
       end
     end
-		attributes = ContentTypes::Plugins::LinkResource.new(url).attributes if attributes.empty? && URI.extract(url).length > 0
+		#attributes = ContentTypes::Plugins::LinkResource.new(url).attributes if attributes.empty? && URI.extract(url).length > 0
     return attributes
   end
   
