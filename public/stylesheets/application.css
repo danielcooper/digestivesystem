@@ -22,7 +22,7 @@ a {
 }
 
 #container {
-  
+
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
@@ -140,7 +140,9 @@ a {
 	overflow: hidden;
 	position: absolute;
 	top: 50%;
-	right: 2;
+
+	right: 2px;
+
 }
 
 .title_overlay {
