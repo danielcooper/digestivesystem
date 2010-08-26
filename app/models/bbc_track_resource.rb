@@ -4,4 +4,8 @@ class BbcTrackResource < Resource
     super + [:artist_name]
   end
 
+  def is_duplicate?
+    Resource.find(:first, :conditions => {:artist_name => artist_name, :title => title})
+  end
+
 end

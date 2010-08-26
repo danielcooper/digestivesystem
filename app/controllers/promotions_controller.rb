@@ -9,18 +9,21 @@ class PromotionsController < ApplicationController
   end
   
   def new
-    @exposure = Exposure.new
     if params[:url]
-      @provided_url = params[:url]
-      attributes = Resource.fetch_prefilled_attributes_for @provided_url
-      unless attributes.empty?
-        @resource = attributes[:type].constantize.new(attributes)
+      unless @resource = Resource.find(:first, :conditions => {:resource_url => params[:url]})
+        @provided_url = params[:url]
+        attributes = Resource.fetch_prefilled_attributes_for @provided_url
+        unless attributes.empty?
+          @resource = attributes[:type].constantize.new(attributes)
+        else
+          flash.now[:notice] = "We couldn't get any infomation from that url!"
+          @resource = Resource.new
+        end
       else
-        flash[:notice] = "We couldn't get any infomation from that url!"
-        @resource = Resource.new
+        flash.now[:notice] = "Creating new exposures for an <a href=\"#{resource_url(@resource)}\">already created resource</a>"
       end
     else
-      flash[:notice] = "No URL specified."
+      flash.now[:notice] = "No URL specified."
       @resource = Resource.new
     end
   end
@@ -29,7 +32,9 @@ class PromotionsController < ApplicationController
     streams = @service.streams
     stream_types = streams.map {|n| n.name}
 
-    resource = params[:promotion].delete(:type).constantize.create(params[:promotion]) #save resource (todo: save or load)
+    unless resource =  Resource.find(:first, :conditions => {:resource_url => params[:promotion][:resource_url]})
+      resource = params[:promotion].delete(:type).constantize.create(params[:promotion]) #save resource (todo: save or load)
+    end
 
     if params[:selected_exposures]
       params[:selected_exposures].each do |key,value|
@@ -43,7 +48,7 @@ class PromotionsController < ApplicationController
         end
       end
       
-      flash[:notice] = "Successfully created exposure."
+      flash[:notice] = "Successfully added exposure to the #{@service.display_name} stream"
       redirect_to [@service,@stream,@exposure]
       
     end

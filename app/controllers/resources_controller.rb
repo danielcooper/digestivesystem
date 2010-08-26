@@ -20,11 +20,11 @@ class ResourcesController < ApplicationController
       unless attributes.empty?
         @resource = attributes[:type].constantize.new(attributes)
       else
-        flash[:notice] = "We couldn't get any infomation from that url!"
+        flash.now[:notice] = "We couldn't get any infomation from that url!"
         @resource = Resource.new
       end
     else
-      flash[:notice] = "No URL specified."
+      flash.now[:notice] = "No URL specified."
       @resource = Resource.new
     end
   end

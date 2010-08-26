@@ -3,6 +3,9 @@ class Resource < ActiveRecord::Base
   has_many :exposures
 
 
+  def self.subclasses
+    super
+  end
 
   def chosen_image
     if external_url_image
@@ -10,7 +13,6 @@ class Resource < ActiveRecord::Base
     end
     return nil
   end
-
 
   def resource_type= value_type
     self.type = value_type
@@ -26,13 +28,17 @@ class Resource < ActiveRecord::Base
     attributes.delete_if{|key,value| json_attributes.include?(key.to_sym) != true}
   end
 
+
+  def is_duplicate?
+    Resource.find(:first, :conditions => {:resource_url => self.resource_url})
+  end
   
   def to_json
     super(:only => json_attributes)
   end
 
 
-   def self.fetch_prefilled_attributes_for url
+  def self.fetch_prefilled_attributes_for url
     attributes = {}
     ContentTypes::PluginManager.instance.each do |n|
       if n.can_handle_resource_type?(url)

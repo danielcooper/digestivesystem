@@ -7,5 +7,5 @@
 </a>
 
 
-<p><strong>Available streams</strong>: <%=  @service.streams.map{|n| link_to(n.display_name, service_stream_path(@service, n))}.to_sentence %> </p>
+<p><strong>Available streams</strong>: <%=  @service.streams.map{|n| link_to(n.display_name, service_stream_exposures_path(@service, n))}.to_sentence %> </p>
 <p><strong>Most recent exposure</strong>: <%=  @service.exposures.empty? ? "No exposures recently" : @service.exposures.last.admin_description %> </p>
