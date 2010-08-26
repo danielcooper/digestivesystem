@@ -209,6 +209,9 @@ and open the template in the editor.
 				if(data.image){
 					img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
 				}
+				else if (size != "large"){
+					img = "<div style='background-color: #272525; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'><p><strong>" + data.artist_name + "</strong></p><p>" + data.title + "</p></div>"
+				}
 				return createBox(size, data.artist_name, data.title, img)
 			};
 
