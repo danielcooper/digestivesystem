@@ -1,7 +1,7 @@
 class BbcTrackResource < Resource
 
   def json_attributes
-    super + [:artist_name]
+    super + [:artist_name, :artist_gid]
   end
 
   def is_duplicate?
