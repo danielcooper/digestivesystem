@@ -8,13 +8,40 @@ and open the template in the editor.
         <title>Radio 1 Demo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<style>
-			#timeline {
-				width:150%;
-				text-align: right;
+
+			#container{
+				background-image: url('/images/r1_bg.jpg');
+				background-position: top center;
+				background-repeat: no-repeat;
+				position: relative;
+				height: 1746px;
+				width: 1156px;
+				margin-right: auto;
+				margin-left: auto;
 			}
-			#container {
-				overflow: scroll;
-				min-height: 400px;
+
+			#timeline {
+				margin: 0px;
+				padding: 0px;
+				width: 150%;
+				text-align: right;
+				height: 320px;
+			}
+
+			#timeline-wrapper{
+				overflow: hidden;
+				height: 320px;
+				width: 977px;
+				position: absolute;
+
+			}
+
+			#timeline-wrapper, #scrollLeft {
+				left: 94px;
+			}
+
+			#timeline-wrapper, .scrollArrow {
+				top: 260px;
 			}
 
 			.front_box {
@@ -45,6 +72,7 @@ and open the template in the editor.
 			.large_box, .large_box img {
 				width: 320px;
 				height: 320px;
+
 			}
 
 			.box_overlay {
@@ -82,8 +110,23 @@ and open the template in the editor.
 				margin-right: 8px;
 			}
 
+			.large_column {
+				margin-right: 0px;
+
+			}
+
 			.box {
 				margin-bottom: 8px;
+			}
+
+			.scrollArrow {
+				position: absolute;
+				z-index: 5;
+			}
+
+			#scrollRight {
+				right: 86px;
+				display: none;
 			}
 		</style>
     </head>
@@ -96,100 +139,172 @@ and open the template in the editor.
 			var items = []
 			var max = 100
 			var updateWithNewItem = function (data_item){
-				var newtimeline = ""
-				while (items.length >= max) items.pop()
-				for (var i = items.length; i > 0; i--){
-					items[i] = items[i-1]
-				}
-				items[0] = data_item
-				var column = ""
-				var columns = []
-				for (var i = 0; i < items.length; i++){
-					if (i == 0){
-						column = "<div class='column'>" + fetchDataFromObject(items[0], "large") + "</div>"
+				if (data_item.blurb != null && data_.title != null){
+					var newtimeline = ""
+					while (items.length >= max) items.pop()
+					for (var i = items.length; i > 0; i--){
+						items[i] = items[i-1]
 					}
-					else if (i < 5){
-						if (i % 2 == 1){
-							columns[Math.ceil(i/2)] = fetchDataFromObject(items[i], "medium")
+					items[0] = data_item
+					var column = ""
+					var columns = []
+					for (var i = 0; i < items.length; i++){
+						if (i == 0){
+							column = "<div class='large_column column'>" + fetchDataFromObject(items[0], "large") + "</div>"
+						}
+						else if (i < 5){
+							if (!columns[Math.ceil(i/2)]){
+								columns[Math.ceil(i/2)] = fetchDataFromObject(items[i], "medium")
+							}
+							else{
+								columns[Math.ceil(i/2)] += fetchDataFromObject(items[i], "medium")
+							}
 						}
 						else{
-							columns[Math.ceil(i/2)] += fetchDataFromObject(items[i], "medium")
+							if (!columns[Math.ceil((i+5)/4)]){
+								columns[Math.ceil((i+5)/4)] = fetchDataFromObject(items[i], "small")
+							}
+							else{
+								columns[Math.ceil((i+5)/4)] += fetchDataFromObject(items[i], "small")
+							}
 						}
 					}
-					else{
-						if (i % 4 == 1){
-							columns[Math.ceil(i/4)] = fetchDataFromObject(items[i], "small")
-						}
-						else{
-							columns[Math.ceil(i/4)] += fetchDataFromObject(items[i], "small")
-						}
+					for(var i = 1; i < columns.length; i++){
+						column += "<div class='column'>" + columns[i] + "</div>"
 					}
+					$("#timeline").html(column)
 				}
-				for(var i = 1; i < columns.length; i++){
-					column += "<div class='column'>" + columns[i] + "</div>"
+			};
+
+			var fetchDataFromObject = function(data, size){
+
+				if (data.type == "BbcTrackResource") return trackHtml(data, size)
+				if (data.type == "BbcSmsResource") return smsHtml(data, size)
+				else return resourceHtml(data, size)
+
+			};
+            
+			var resourceHtml = function (data, size){
+				img = ""
+				if(data.image){
+					img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
 				}
-			$("#timeline").html(column)
-		};
+				return createBox(size, data.title, data.blurb, img)
+			};
 
-		var fetchDataFromObject = function(data, size){
-			if (data.type == "BbcTrackResource") return trackHtml(data.bbc_track_resource, size)
-			else return resourceHtml(data.bbc_newsbeat_resource, size)
-		};
-            
-		var resourceHtml = function (data, size){
-			img = ""
-			if(data.external_image_url){
-				img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.external_image_url + "' /> "
+			var trackHtml = function (data, size){
+				img = ""
+				if(data.image){
+					img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
+				}
+				return createBox(size, data.artist_name, data.title, img)
+			};
+
+			var smsHtml = function (data, size){
+				presentation = "<div style='background-color: #272525'><h2>" + data.blurb + "</h2></div>"
+				if (data.blurb != null)	return createBox(size, "", "", data.blurb)
+			};
+
+			var createBox = function (size, title, blurb, img){
+				title = !title ? "" : title
+				blurb = !blurb ? "" : blurb
+				/*if (blurb.length > 120){
+				var words = blurb.split(" ")
+				blurb = words[0] + " "
+				var i = 1
+				while(i < words.length && (blurb + words[i]).length < 120){
+					blurb += words[i] + " "
+					i++
+				}
+				if (blurb.substring(blurb.length-1, 1).matches(/[, \-]/)){
+					blurb = blurb.substring(0, blurb.length-1)
+				}
+				if (blurb.substring(blurb.length-1, 1) != "."){
+					blurb += "..."
+				}
+			}*/
+				img = !img ? "" : img
+				switch(size){
+					case "small":
+						return "<div class='small_box box'>" + img + "</div>"
+						break;
+					case "medium":
+						return "<div class='medium_box box'>" + img + "</div>"
+						break;
+					case "large":
+						return "<div class='large_box box'>" + img + "<div class='box_div'><h2 class='box_title box_overlay'>" + title + "</h2><h4 class='box_blurb box_overlay'>"+ blurb + "</h4></div></div>"
+						break;
+				}
 			}
-			return createBox(size, data.title, data.blurb, img)
-		};
-
-		var trackHtml = function (data, size){
-			img = ""
-			if(data.external_image_url){
-				img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.external_image_url + "' /> "
-			}
-			return createBox(size, data.artist_name, data.title, img)
-		};
-
-		var createBox = function (size, title, blurb, img){
-			title = !title ? "" : title
-			blurb = !blurb ? "" : blurb
-			img = !img ? "" : img
-			switch(size){
-				case "small":
-					return "<div class='small_box box'>" + img + "</div>"
-					break;
-				case "medium":
-					return "<div class='medium_box box'>" + img + "</div>"
-					break;
-				case "large":
-					return "<div class='large_box box'>" + img + "<div class='box_div'><h2 class='box_title box_overlay'>" + title + "</h2><h4 class='box_blurb box_overlay'>"+ blurb + "</h4></div></div>"
-					break;
-			}
-		}
-
-            
-
-
-
-
-		// Bind to server events
-		server.bind('added_exposure', function(data) {
-			updateWithNewItem(data);
-		});
 
             
 
-		$(document).ready(function() {
-			$("#container").scrollLeft($("#container").width())
+
+
+
+			// Bind to server events
+			server.bind('added_exposure', function(data) {
+				updateWithNewItem(data);
+			});
+
+            
+
+			$(document).ready(function() {
+				$.getJSON("/services/radio1/streams/live/exposures.json", function(data){
+					var rev = data.exposures.reverse()
+					for (var i = 0; i < rev.length; i++){
+						updateWithNewItem(rev[i])
+					}
+					$("#timeline-wrapper").scrollLeft($("#timeline").width())
+				})
+
+				$("#scrollLeft").hover(function(){
+					$("#scrollLeft").attr("src", "/images/arrowLeftHover.png")
+				},
+				function(){
+					$("#scrollLeft").attr("src", "/images/arrowLeft.png")
+				})
+
+				$("#scrollRight").hover(function(){
+					$("#scrollRight").attr("src", "/images/arrowRightHover.png")
+				},
+				function(){
+					$("#scrollRight").attr("src", "/images/arrowRight.png")
+				})
+
+				$("#scrollLeft").click(function(){
+					if ($("#timeline-wrapper").scrollLeft() == $("#timeline-wrapper").attr("scrollWidth") - $("#timeline-wrapper").width()){
+						$("#timeline-wrapper").css("left", "" + (parseInt($("#timeline-wrapper").css("left")) + 74) + "px")
+						$("#timeline-wrapper").css("width", "826px")
+					}
+					$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()-328)
+					if ($("#timeline-wrapper").scrollLeft() == 0){
+						$("#scrollLeft").css("display", "none")
+					}
+					
+					$("#scrollRight").css("display", "inline")
+				})
+				$("#scrollRight").click(function(){
+					if ($("#timeline-wrapper").scrollLeft()+320 == $("#timeline-wrapper").attr("scrollWidth") - $("#timeline-wrapper").width()){
+						$("#scrollRight").css("display", "none")
+						$("#timeline-wrapper").css("left", $("#timeline-wrapper").css("left", "" + (parseInt($("#timeline-wrapper").css("left")) - 74) + "px"))
+						$("#timeline-wrapper").css("width", "900px")
+					}
+					$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()+320)
+					$("#scrollLeft").css("display", "inline")
+				})
                 
 
-		});
+			});
         </script>
+
 		<div id="container">
-			<div id="timeline">
-				<div class="column">
+			<img src="/images/arrowLeft.png" alt="arrow image" id="scrollLeft" class="scrollArrow"/>
+			<img src="/images/arrowRight.png" alt="arrow image" id="scrollRight" class="scrollArrow"/>
+			<div id="timeline-wrapper">
+
+				<div id="timeline">
+					<!--<div class="column">
 					<div class="large_box box">
 						<img src="http://open.live.bbc.co.uk/dynamic_images/radio1_square320/http://news.bbcimg.co.uk/media/images/48835000/jpg/_48835430_ivorywave_teen466.jpg">
 						<div class="box_div">
@@ -269,11 +384,9 @@ and open the template in the editor.
 					<div class="small_box box">
 						<img src="http://open.live.bbc.co.uk/dynamic_images/radio1_square320/http://news.bbcimg.co.uk/media/images/48835000/jpg/_48835430_ivorywave_teen466.jpg">
 					</div>
+				</div>-->
 				</div>
 			</div>
-		</div>
-		<div>
-			Hello how are you lovely people?
 		</div>
     </body>
 </html>

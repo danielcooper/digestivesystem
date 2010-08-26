@@ -1,4 +1,7 @@
 body {
+    width: 965px;
+    margin-left: auto;
+    margin-right: auto;
   background-color: #CDCDCD;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
@@ -19,7 +22,7 @@ a {
 }
 
 #container {
-  width: 75%;
+
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
@@ -137,7 +140,9 @@ a {
 	overflow: hidden;
 	position: absolute;
 	top: 50%;
+
 	right: 2px;
+
 }
 
 .title_overlay {

@@ -9,8 +9,8 @@ class ExposuresController < ApplicationController
     respond_to do |format|
       format.html
       format.json{
-
         render :json => "{\"exposures\":#{@exposures.map{|e| e.to_json }.to_json}}"
+
       }
     end
   end
@@ -43,7 +43,17 @@ class ExposuresController < ApplicationController
   end
   
   def create
+    Resource.subclasses.map { |subclass| subclass.name.underscore }.each do |type|
+      if params[:exposure][params["#{type}_attributes".to_sym]]
+        @resource = type.camelcase.constantize.new(params[:exposure][params["#{type}_attributes".to_sym]])
+        dup = resource.is_duplicate?
+        @resource = dup if dup
+        params[:exposure] = params[:exposure].delete_if{|k,v| k == ("#{type}_attributes".to_sym)}
+      end
+    end
+
     @exposure = Exposure.new(params[:exposure])
+    @exposure.resource = @resource
     @exposure.stream = @stream
     if @exposure.save
       Pusher["#{@service.name}-#{@stream.name}"].trigger("added_exposure", @exposure.to_json)

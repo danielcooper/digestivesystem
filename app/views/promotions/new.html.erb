@@ -1,5 +1,3 @@
-<% title "New Promotion" %>
-
 <script type="text/javascript">
   $(document).ready(function() {
     selected_image = $("#resource_external_image_url").val();
@@ -63,11 +61,26 @@
   .exposure{
     padding: 10px;
     margin-top: 5px;
+    height:50px;
   }
+
   .exposure h3{
     display: inline;
   }
+
+  .exposure span{
+    width: 400px;
+    text-align: right;
+  }
+
+  #form_box{
+    float: left;
+    width: 60px;
+  }
 </style>
+
+
+<% title "New Promotion" %>
 
 
 <% form_for 'promotion', @resource, :url => service_promotions_path, :html => {:method => :post} do |f| %>
@@ -79,20 +92,25 @@
   <%= f.hidden_field :resource_url, :value => @resource.resource_url %>
   <% if @resource.external_image_url != nil %>
     <% @resource.external_image_url = [@resource.external_image_url] unless @resource.external_image_url.is_a? Array  %>
-    <p>
-    <div class="front_box image_preview small_box small_image_preview" ><img id ="small_image" src="" width = '74' height = '74'/></div>
-    <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
-    <div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h @resource.title %></h1>
-        <div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h @resource.blurb %></h3></div></div>
-    </p>
   <%end%>
+  <p>
+  <div class="front_box image_preview small_box small_image_preview" ><img id ="small_image" src="" width = '74' height = '74'/></div>
+  <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
+  <div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h @resource.title %></h1>
+      <div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h @resource.blurb %></h3></div></div>
+  </p>
 
-  <p><strong>Title</strong>:<br/> <input id="exposure_template_title" name="exposures_template[title]" size="30" type="text" value="<%= @resource.title %>" /></p>
-  <p><strong>Blurb</strong>:<br/> <input id="exposure_template_blurb" name="exposures_template[blurb]" size="90" type="text" value="<%= @resource.blurb %>" /></p>
-  <% if @resource.external_image_url != nil %>
-    <input id="exposure_template_image" name="exposures_template[image]" type="hidden" value="" />
-    <p><strong>Image</strong>: <br/><%= f.select :external_image_url, [["No Image",""]] + @resource.external_image_url, {} , :id=>"resource_external_image_url"%></p>
-  <%end%>
+
+  <% @resource.external_image_url.map!{|i|[i[-35..-1],"http://open.live.bbc.co.uk/dynamic_images/radio1_square320/#{i}"]} if @resource.external_image_url%>
+
+  <div id="form_box">
+    <p><strong>Title</strong>:<br/> <input id="exposure_template_title" name="exposures_template[title]" size="30" type="text" value="<%= @resource.title %>" /></p>
+    <p><strong>Blurb</strong>:<br/> <textarea rows="10" id="exposure_template_blurb" name="exposures_template[blurb]" cols="25" ><%= @resource.blurb %></textarea></p>
+    <% if @resource.external_image_url != nil %>
+      <input id="exposure_template_image" name="exposures_template[image]" type="hidden" value="" />
+      <p><strong>Image</strong>: <br/><%= f.select :external_image_url, [["No Image",""]] + @resource.external_image_url, {} , :id=>"resource_external_image_url"%></p>
+    <%end%>
+  </div>
 
   <br clear="all" />
   <h2>Exposures</h2>
@@ -106,7 +124,7 @@
     <input class="exposure_check" type="checkbox" name="selected_exposures[promo][active]" value="active" />
     <h3>Promotion</h3>
     <span style="float: right;">
-      Birth: <%=  datetime_select("selected_exposures[promo][birth]", "birth", options = {}, html_options = {:disabled=>true})%>
+      Birth: <%=  datetime_select("selected_exposures[promo][birth]", "birth", options = {}, html_options = {:disabled=>true})%><br/>
       Death: <%=  datetime_select("selected_exposures[promo][death]", "death", options = {}, html_options = {:disabled=>true})%>
     </span>
   </div>
@@ -115,7 +133,7 @@
     <input class="exposure_check" type="checkbox" name="selected_exposures[hero][active]" value="active" />
     <h3>Hero Promotion</h3>
     <span style="float: right;">
-      Birth: <%=  datetime_select("selected_exposures[hero][birth]", "birth", options = {}, html_options = {:disabled=>true})%>
+      Birth: <%=  datetime_select("selected_exposures[hero][birth]", "birth", options = {}, html_options = {:disabled=>true})%><br/>
       Death: <%=  datetime_select("selected_exposures[hero][death]", "death", options = {}, html_options = {:disabled=>true})%>
     </span>
 

@@ -11,7 +11,7 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <div style=" overflow:auto; width: 75%; margin-left:auto; margin-right: auto; ">
+    <div style=" overflow:auto;">
       <div style="float: left; width: 50%"><img src="/images/bbc.png" /></div>
       <div style="float: right; width: 50%; text-align: right; "><%= link_to image_tag(@service.logo), @service if @service %> <%= link_to "Home", '/'%> | <%= link_to "Resources Directory", resources_path %> | <%= link_to "Services", services_path %> </div>
     </div>
