@@ -2,17 +2,14 @@
 
 <table>
   <tr>
-    <th>Type</th>
     <th>Title</th>
     <th>Blurb</th>
-    <th>Resource Url</th>
+
   </tr>
   <% for resource in @resources %>
     <tr>
-      <td><%=h resource.type %></td>
       <td><%=h resource.title %></td>
       <td><%=h resource.blurb %></td>
-      <td><%=h resource.resource_url %></td>
       <td><%= link_to "Show", resource_path(resource) %></td>
       <td><%= link_to "Edit", edit_resource_path(resource) %></td>
       <td><%= link_to "Destroy", resource_path(resource), :confirm => 'Are you sure?', :method => :delete %></td>
