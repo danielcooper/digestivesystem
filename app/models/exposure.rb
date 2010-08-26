@@ -23,8 +23,4 @@ class Exposure < ActiveRecord::Base
     "TODO:IMPLEMENT ME!"
   end
 
-	def admin_description
-		"DEFINE ME"
-	end
-
 end

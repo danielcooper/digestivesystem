@@ -9,7 +9,8 @@ class ExposuresController < ApplicationController
     respond_to do |format|
       format.html
       format.json{
-        render :json => "{\"exposures\":[#{@exposures.map{|e| e.to_json }.join(",")}]}"
+
+        render :json => "{\"exposures\":#{@exposures.map{|e| e.to_json }.to_json}}"
       }
     end
   end
