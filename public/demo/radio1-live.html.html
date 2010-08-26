@@ -172,11 +172,11 @@ and open the template in the editor.
 						}
 					}
 					else{
-						if (!columns[Math.ceil((i+5)/4)]){
-							columns[Math.ceil((i+5)/4)] = fetchDataFromObject(items[i], "small")
+						if (!columns[Math.ceil((i+4)/4)]){
+							columns[Math.ceil((i+4)/4)] = fetchDataFromObject(items[i], "small")
 						}
 						else{
-							columns[Math.ceil((i+5)/4)] += fetchDataFromObject(items[i], "small")
+							columns[Math.ceil((i+4)/4)] += fetchDataFromObject(items[i], "small")
 						}
 					}
 				}
