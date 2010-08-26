@@ -110,6 +110,14 @@ and open the template in the editor.
 				margin-right: 8px;
 			}
 
+			.column a div img {
+				border: none;
+			}
+
+			.column a {
+				text-decoration: none;
+			}
+
 			.large_column {
 				margin-right: 0px;
 
@@ -128,6 +136,10 @@ and open the template in the editor.
 				right: 86px;
 				display: none;
 			}
+
+			p, h1, h2{
+				font-family: Arial;
+			}
 		</style>
     </head>
     <body>
@@ -139,47 +151,46 @@ and open the template in the editor.
 			var items = []
 			var max = 100
 			var updateWithNewItem = function (data_item){
-				if (data_item.blurb != null && data_.title != null){
-					var newtimeline = ""
-					while (items.length >= max) items.pop()
-					for (var i = items.length; i > 0; i--){
-						items[i] = items[i-1]
+				var newtimeline = ""
+				while (items.length >= max) items.pop()
+				for (var i = items.length; i > 0; i--){
+					items[i] = items[i-1]
+				}
+				items[0] = data_item
+				var column = ""
+				var columns = []
+				for (var i = 0; i < items.length; i++){
+					if (i == 0){
+						column = "<div class='large_column column'>" + fetchDataFromObject(items[0], "large") + "</div>"
 					}
-					items[0] = data_item
-					var column = ""
-					var columns = []
-					for (var i = 0; i < items.length; i++){
-						if (i == 0){
-							column = "<div class='large_column column'>" + fetchDataFromObject(items[0], "large") + "</div>"
-						}
-						else if (i < 5){
-							if (!columns[Math.ceil(i/2)]){
-								columns[Math.ceil(i/2)] = fetchDataFromObject(items[i], "medium")
-							}
-							else{
-								columns[Math.ceil(i/2)] += fetchDataFromObject(items[i], "medium")
-							}
+					else if (i < 5){
+						if (!columns[Math.ceil(i/2)]){
+							columns[Math.ceil(i/2)] = fetchDataFromObject(items[i], "medium")
 						}
 						else{
-							if (!columns[Math.ceil((i+5)/4)]){
-								columns[Math.ceil((i+5)/4)] = fetchDataFromObject(items[i], "small")
-							}
-							else{
-								columns[Math.ceil((i+5)/4)] += fetchDataFromObject(items[i], "small")
-							}
+							columns[Math.ceil(i/2)] += fetchDataFromObject(items[i], "medium")
 						}
 					}
-					for(var i = 1; i < columns.length; i++){
-						column += "<div class='column'>" + columns[i] + "</div>"
+					else{
+						if (!columns[Math.ceil((i+5)/4)]){
+							columns[Math.ceil((i+5)/4)] = fetchDataFromObject(items[i], "small")
+						}
+						else{
+							columns[Math.ceil((i+5)/4)] += fetchDataFromObject(items[i], "small")
+						}
 					}
-					$("#timeline").html(column)
 				}
+				for(var i = 1; i < columns.length; i++){
+					column += "<div class='column'>" + columns[i] + "</div>"
+				}
+				$("#timeline").html(column)
+				
 			};
 
 			var fetchDataFromObject = function(data, size){
-
 				if (data.type == "BbcTrackResource") return trackHtml(data, size)
 				if (data.type == "BbcSmsResource") return smsHtml(data, size)
+				if (data.type == "TwitterResource") return tweetHtml(data, size)
 				else return resourceHtml(data, size)
 
 			};
@@ -189,7 +200,8 @@ and open the template in the editor.
 				if(data.image){
 					img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
 				}
-				return createBox(size, data.title, data.blurb, img)
+				if (data.resource_url) return "<a href='" + data.resource_url + "' target='blank'>" + createBox(size, data.title, data.blurb, img) + "</a>"
+				else return createBox(size, data.title, data.blurb, img)
 			};
 
 			var trackHtml = function (data, size){
@@ -201,11 +213,22 @@ and open the template in the editor.
 			};
 
 			var smsHtml = function (data, size){
-				presentation = "<div style='background-color: #272525'><h2>" + data.blurb + "</h2></div>"
-				if (data.blurb != null)	return createBox(size, "", "", data.blurb)
+				if (size == "large"){
+					var sms = "<h2>" + data.blurb + "</h2>"
+				}
+				else{
+					var sms = "<p>" + data.blurb + "</p>"
+				}
+				presentation = "<div style='background-color: #272525; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'>" + sms + "</div>"
+				return createBox(size, "", "", presentation)
 			};
 
-			var createBox = function (size, title, blurb, img){
+			var tweetHtml = function (data, size){
+				presentation = "<div style='background-color: #2276BB; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'></div>"
+				return createBox(size, data.title, data.blurb, presentation)
+			};
+
+			var createBox = function (size, title, blurb, img, url){
 				title = !title ? "" : title
 				blurb = !blurb ? "" : blurb
 				/*if (blurb.length > 120){
@@ -250,6 +273,10 @@ and open the template in the editor.
             
 
 			$(document).ready(function() {
+				var hoverleft = new Image
+				hoverleft.src="/images/arrowRightHover.png"
+				var hoverright = new Image
+				hoverright.srv="/images/arrowLeftHover.png"
 				$.getJSON("/services/radio1/streams/live/exposures.json", function(data){
 					var rev = data.exposures.reverse()
 					for (var i = 0; i < rev.length; i++){
@@ -276,8 +303,11 @@ and open the template in the editor.
 					if ($("#timeline-wrapper").scrollLeft() == $("#timeline-wrapper").attr("scrollWidth") - $("#timeline-wrapper").width()){
 						$("#timeline-wrapper").css("left", "" + (parseInt($("#timeline-wrapper").css("left")) + 74) + "px")
 						$("#timeline-wrapper").css("width", "826px")
+						$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()-398)
 					}
-					$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()-328)
+					else{
+						$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()-328)
+					}
 					if ($("#timeline-wrapper").scrollLeft() == 0){
 						$("#scrollLeft").css("display", "none")
 					}
@@ -285,12 +315,16 @@ and open the template in the editor.
 					$("#scrollRight").css("display", "inline")
 				})
 				$("#scrollRight").click(function(){
-					if ($("#timeline-wrapper").scrollLeft()+320 == $("#timeline-wrapper").attr("scrollWidth") - $("#timeline-wrapper").width()){
+					if ($("#timeline-wrapper").scrollLeft()+430 >= $("#timeline-wrapper").attr("scrollWidth") - $("#timeline-wrapper").width()){
 						$("#scrollRight").css("display", "none")
 						$("#timeline-wrapper").css("left", $("#timeline-wrapper").css("left", "" + (parseInt($("#timeline-wrapper").css("left")) - 74) + "px"))
-						$("#timeline-wrapper").css("width", "900px")
+						$("#timeline-wrapper").css("width", "977px")
+						$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").width())
+
 					}
-					$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()+320)
+					else{
+						$("#timeline-wrapper").scrollLeft($("#timeline-wrapper").scrollLeft()+328)
+					}
 					$("#scrollLeft").css("display", "inline")
 				})
                 
