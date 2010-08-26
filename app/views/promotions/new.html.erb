@@ -91,19 +91,20 @@
   <%= f.hidden_field :resource_url, :value => @resource.resource_url %>
   <% if @resource.external_image_url != nil %>
     <% @resource.external_image_url = [@resource.external_image_url] unless @resource.external_image_url.is_a? Array  %>
-    <p>
-    <div class="front_box image_preview small_box small_image_preview" ><img id ="small_image" src="" width = '74' height = '74'/></div>
-    <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
-    <div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h @resource.title %></h1>
-        <div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h @resource.blurb %></h3></div></div>
-    </p>
   <%end%>
+  <p>
+  <div class="front_box image_preview small_box small_image_preview" ><img id ="small_image" src="" width = '74' height = '74'/></div>
+  <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
+  <div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h @resource.title %></h1>
+      <div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h @resource.blurb %></h3></div></div>
+  </p>
+
 
   <% @resource.external_image_url.map!{|i|[i[-35..-1],i]} if @resource.external_image_url%>
 
   <div id="form_box">
     <p><strong>Title</strong>:<br/> <input id="exposure_template_title" name="exposures_template[title]" size="30" type="text" value="<%= @resource.title %>" /></p>
-    <p><strong>Blurb</strong>:<br/> <textarea rows="10" id="exposure_template_blurb" name="exposures_template[blurb]" cols="25"  value="<%= @resource.blurb %>"></textarea></p>
+    <p><strong>Blurb</strong>:<br/> <textarea rows="10" id="exposure_template_blurb" name="exposures_template[blurb]" cols="25" ><%= @resource.blurb %></textarea></p>
     <% if @resource.external_image_url != nil %>
       <input id="exposure_template_image" name="exposures_template[image]" type="hidden" value="" />
       <p><strong>Image</strong>: <br/><%= f.select :external_image_url, [["No Image",""]] + @resource.external_image_url, {} , :id=>"resource_external_image_url"%></p>
