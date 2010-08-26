@@ -15,7 +15,7 @@ class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
   end
 
   def self.can_handle_resource_type? url
-    /http:\/\/w{0,3}\.?twitter\.com\/[^\/]*\/status\/(\d*)/.match(url)
+    /https?:\/\/w{0,3}\.?twitter\.com\/[^\/]*\/status\/(\d*)/.match(url)
   end
 
 
