@@ -99,8 +99,8 @@
     </p>
   <%end%>
 
+  <% @resource.external_image_url.map!{|i|[i[-35..-1],i]} if @resource.external_image_url%>
 
-    <% @resource.external_image_url.map!{|i|[i[-35..-1],i]} %>
   <div id="form_box">
     <p><strong>Title</strong>:<br/> <input id="exposure_template_title" name="exposures_template[title]" size="30" type="text" value="<%= @resource.title %>" /></p>
     <p><strong>Blurb</strong>:<br/> <textarea rows="10" id="exposure_template_blurb" name="exposures_template[blurb]" cols="25"  value="<%= @resource.blurb %>"></textarea></p>
