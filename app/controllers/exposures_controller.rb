@@ -57,10 +57,6 @@ class ExposuresController < ApplicationController
     @exposure.stream = @stream
     if @exposure.save
       Pusher["#{@service.name}-#{@stream.name}"].trigger("added_exposure", @exposure.to_json)
-      flash[:notice] = "Successfully created exposure."
-      redirect_to [@service]
-    else
-      render :action => 'new'
     end
   end
   
