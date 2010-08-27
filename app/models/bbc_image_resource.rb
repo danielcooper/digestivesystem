@@ -1,0 +1,3 @@
+class BbcImageResource < Resource
+
+end
