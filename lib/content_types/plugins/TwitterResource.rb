@@ -27,7 +27,7 @@ class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
   def attributes
     @attributes ||= begin
       @twitter_data ||= fetch_twitter_infomation_for(@twitter_status_id)
-      {:resource_url => @url, :title => "@#{@twitter_data["user"]["name"]}", :blurb => @twitter_data["text"], :type => self.class.model.to_s.camelize}
+      {:resource_url => @url, :title => "@#{@twitter_data["user"]["name"]}", :blurb => @twitter_data["text"], :type => self.class.model.to_s.camelize, :external_image_url => @twitter_data["user"]["profile_image_url"].gsub!(/_normal/, '')}
     end
   end
 end

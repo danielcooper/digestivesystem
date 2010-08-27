@@ -1,0 +1,3 @@
+class BbcVideoResource < Resource
+  
+end

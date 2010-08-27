@@ -30,7 +30,7 @@ class ContentTypes::Plugins::BBCVideoResource < ContentTypes::Base
   def attributes
     @attributes ||= begin
       @episode_data ||= self.class.fetch_episode_information_for(@url)
-      {:resource_url => @url, :title => @episode_data["programme"]["title"], :blurb => @episode_data["programme"]["short_synopsis"], :type => self.class.model.to_s.camelize, :external_url_image =>"http://www.bbc.co.uk/iplayer/images/clip/#{@pid}_150_84.jpg", :pid => @pid}
+      {:resource_url => @url, :title => @episode_data["programme"]["title"], :blurb => @episode_data["programme"]["short_synopsis"], :type => self.class.model.to_s.camelize, :external_image_url =>"http://www.bbc.co.uk/iplayer/images/clip/#{@pid}_640_360.jpg", :pid => @pid}
     end
   end
 end

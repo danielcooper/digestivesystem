@@ -57,7 +57,9 @@ class ExposuresController < ApplicationController
     @exposure.stream = @stream
     if @exposure.save
       Pusher["#{@service.name}-#{@stream.name}"].trigger("added_exposure", @exposure.to_json)
+      render :nothing => true
     end
+    render :nothing => true
   end
   
   def edit
