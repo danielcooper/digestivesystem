@@ -1,30 +1,36 @@
 <script type="text/javascript">
   $(document).ready(function() {
-    selected_image = $("#resource_external_image_url").val();
+    selected_image = "http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + $("#resource_external_image_url").val();
     $("#exposure_template_image").val(selected_image);
-    if(selected_image != ""){
+    if($("#resource_external_image_url").val() != ""){
 
       $("#small_image").attr('src', selected_image);
+	  $("#small_image").css('display', 'inline');
       $("#medium_image").attr('src', selected_image);
+	  $("#medium_image").css('display', 'inline');
       $("#large_image").attr('src', selected_image);
+	  $("#large_image").css('display', 'inline');
     }else{
 
-      $("#small_image").attr('src', "");
-      $("#medium_image").attr('src', "");
-      $("#large_image").attr('src', "");
+      $("#small_image").css('display', 'none');
+      $("#medium_image").css('display', 'none');
+      $("#large_image").css('display', 'none');
     }
 
     $("#resource_external_image_url").change(function(){
-      selected_image = $("#resource_external_image_url").val();
+      selected_image = "http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + $("#resource_external_image_url").val();
       $("#exposure_template_image").val(selected_image);
-      if(selected_image != ""){
+      if($("#resource_external_image_url").val() != ""){
         $("#small_image").attr('src', selected_image);
-        $("#medium_image").attr('src', selected_image);
-        $("#large_image").attr('src', selected_image);
+		$("#small_image").css('display', 'inline');
+		$("#medium_image").attr('src', selected_image);
+		$("#medium_image").css('display', 'inline');
+		$("#large_image").attr('src', selected_image);
+		$("#large_image").css('display', 'inline');
       }else{
-        $("#small_image").attr('src', "");
-        $("#medium_image").attr('src', "");
-        $("#large_image").attr('src', "");
+        $("#small_image").css('display', 'none');
+        $("#medium_image").css('display', 'none');
+        $("#large_image").css('display', 'none');
       }
 
     });
@@ -91,51 +97,51 @@
   <%= f.hidden_field :blurb, :value => @resource.blurb %>
   <%= f.hidden_field :resource_url, :value => @resource.resource_url %>
   <% if @resource.external_image_url != nil %>
-    <% @resource.external_image_url = [@resource.external_image_url] unless @resource.external_image_url.is_a? Array  %>
+	<% @resource.external_image_url = [@resource.external_image_url] unless @resource.external_image_url.is_a? Array  %>
   <%end%>
   <p>
   <div class="front_box image_preview small_box small_image_preview" ><img id ="small_image" src="" width = '74' height = '74'/></div>
   <div class="front_box image_preview medium_box medium_image_preview"><img id="medium_image" src="" width = '156' height = '156'/></div>
   <div class="front_box image_preview large_box" ><img src="" id="large_image" width = '320' height = '320' /><div class="box_div"><h1 class="box_overlay title_overlay"><%=h @resource.title %></h1>
-      <div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h @resource.blurb %></h3></div></div>
+	  <div class="clear"></div><h3 class="box_overlay box_blurb" ><%=h @resource.blurb %></h3></div></div>
   </p>
 
 
-  <% @resource.external_image_url.map!{|i|[i[-35..-1],"http://open.live.bbc.co.uk/dynamic_images/radio1_square320/#{i}"]} if @resource.external_image_url%>
+  <% @resource.external_image_url.map!{|i| [i[-35..-1],i]} if @resource.external_image_url%>
 
   <div id="form_box">
-    <p><strong>Title</strong>:<br/> <input id="exposure_template_title" name="exposures_template[title]" size="30" type="text" value="<%= @resource.title %>" /></p>
-    <p><strong>Blurb</strong>:<br/> <textarea rows="10" id="exposure_template_blurb" name="exposures_template[blurb]" cols="25" ><%= @resource.blurb %></textarea></p>
-    <% if @resource.external_image_url != nil %>
-      <input id="exposure_template_image" name="exposures_template[image]" type="hidden" value="" />
-      <p><strong>Image</strong>: <br/><%= f.select :external_image_url, [["No Image",""]] + @resource.external_image_url, {} , :id=>"resource_external_image_url"%></p>
-    <%end%>
+	<p><strong>Title</strong>:<br/> <input id="exposure_template_title" name="exposures_template[title]" size="30" type="text" value="<%= @resource.title %>" /></p>
+	<p><strong>Blurb</strong>:<br/> <textarea rows="10" id="exposure_template_blurb" name="exposures_template[blurb]" cols="25" ><%= @resource.blurb %></textarea></p>
+	<% if @resource.external_image_url != nil %>
+	  <input id="exposure_template_image" name="exposures_template[image]" type="hidden" value="" />
+	  <p><strong>Image</strong>: <br/><%= f.select :external_image_url, [["No Image",""]] + @resource.external_image_url, {} , :id=>"resource_external_image_url"%></p>
+	<%end%>
   </div>
 
   <br clear="all" />
   <h2>Exposures</h2>
 
   <div id="live_exposure" class ="exposure active_exposure" >
-    <input class="exposure_check" type="checkbox" name="selected_exposures[live][active]" value="active" checked="true"/>
-    <h3>Live</h3>
+	<input class="exposure_check" type="checkbox" name="selected_exposures[live][active]" value="active" checked="true"/>
+	<h3>Live</h3>
   </div>
 
   <div id="live_exposure" class ="exposure not_active_exposure" >
-    <input class="exposure_check" type="checkbox" name="selected_exposures[promo][active]" value="active" />
-    <h3>Promotion</h3>
-    <span style="float: right;">
-      Birth: <%=  datetime_select("selected_exposures[promo][birth]", "birth", options = {}, html_options = {:disabled=>true})%><br/>
-      Death: <%=  datetime_select("selected_exposures[promo][death]", "death", options = {}, html_options = {:disabled=>true})%>
-    </span>
+	<input class="exposure_check" type="checkbox" name="selected_exposures[promo][active]" value="active" />
+	<h3>Promotion</h3>
+	<span style="float: right;">
+	  Birth: <%=  datetime_select("selected_exposures[promo][birth]", "birth", options = {}, html_options = {:disabled=>true})%><br/>
+	  Death: <%=  datetime_select("selected_exposures[promo][death]", "death", options = {}, html_options = {:disabled=>true})%>
+	</span>
   </div>
 
   <div id="live_exposure" class ="exposure not_active_exposure" >
-    <input class="exposure_check" type="checkbox" name="selected_exposures[hero][active]" value="active" />
-    <h3>Hero Promotion</h3>
-    <span style="float: right;">
-      Birth: <%=  datetime_select("selected_exposures[hero][birth]", "birth", options = {}, html_options = {:disabled=>true})%><br/>
-      Death: <%=  datetime_select("selected_exposures[hero][death]", "death", options = {}, html_options = {:disabled=>true})%>
-    </span>
+	<input class="exposure_check" type="checkbox" name="selected_exposures[hero][active]" value="active" />
+	<h3>Hero Promotion</h3>
+	<span style="float: right;">
+	  Birth: <%=  datetime_select("selected_exposures[hero][birth]", "birth", options = {}, html_options = {:disabled=>true})%><br/>
+	  Death: <%=  datetime_select("selected_exposures[hero][death]", "death", options = {}, html_options = {:disabled=>true})%>
+	</span>
 
   </div>
 

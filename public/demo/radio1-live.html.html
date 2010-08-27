@@ -7,6 +7,7 @@ and open the template in the editor.
     <head>
         <title>Radio 1 Demo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="shortcut icon" href="/favicon.ico" />
 		<style>
 
 			#container{
@@ -196,23 +197,22 @@ and open the template in the editor.
 			};
             
 			var resourceHtml = function (data, size){
-				img = ""
+				var img = ""
 				if(data.image){
-					img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
+					var img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
 				}
-				if (data.resource_url) return "<a href='" + data.resource_url + "' target='blank'>" + createBox(size, data.title, data.blurb, img) + "</a>"
-				else return createBox(size, data.title, data.blurb, img)
+				return createBox(size, data.title, data.blurb, img, data)
 			};
 
 			var trackHtml = function (data, size){
-				img = ""
+				var img = ""
 				if(data.image){
-					img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
+					var img =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
 				}
 				else if (size != "large"){
-					img = "<div style='background-color: #272525; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'><p><strong>" + data.artist_name + "</strong></p><p>" + data.title + "</p></div>"
+					var img = "<div style='background-color: #272525; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'><p><strong>" + data.artist_name + "</strong></p><p>" + data.title + "</p></div>"
 				}
-				return createBox(size, data.artist_name, data.title, img)
+				return createBox(size, data.artist_name, data.title, img, data)
 			};
 
 			var smsHtml = function (data, size){
@@ -222,16 +222,21 @@ and open the template in the editor.
 				else{
 					var sms = "<p>" + data.blurb + "</p>"
 				}
-				presentation = "<div style='background-color: #272525; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'>" + sms + "</div>"
+				var presentation = "<div style='background-color: #272525; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'>" + sms + "</div>"
 				return createBox(size, "", "", presentation)
 			};
 
 			var tweetHtml = function (data, size){
-				presentation = "<div style='background-color: #2276BB; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'></div>"
-				return createBox(size, data.title, data.blurb, presentation)
+				if (data.image && size == "large"){
+					var presentation =  "<img src='http://open.live.bbc.co.uk/dynamic_images/radio1_square320/" + data.image + "' /> "
+				}
+				else{
+					var presentation = "<div style='background-color: #2276BB; width: 100%; height:100%; overflow: hidden; margin-top: 0; color: white'>" + data.blurb + "</div>"
+				}
+				return createBox(size, data.title, data.blurb, presentation, data)
 			};
 
-			var createBox = function (size, title, blurb, img, url){
+			var createBox = function (size, title, blurb, img, data){
 				title = !title ? "" : title
 				blurb = !blurb ? "" : blurb
 				/*if (blurb.length > 120){
@@ -252,12 +257,15 @@ and open the template in the editor.
 				img = !img ? "" : img
 				switch(size){
 					case "small":
+						if (data && data.resource_url) return "<a href='" + data.resource_url + "' target='blank'>" + "<div class='small_box box'>" + img + "</div>" + "</a>"
 						return "<div class='small_box box'>" + img + "</div>"
 						break;
 					case "medium":
+						if (data && data.resource_url) return "<a href='" + data.resource_url + "' target='blank'>" + "<div class='medium_box box'>" + img + "</div>" + "</a>"
 						return "<div class='medium_box box'>" + img + "</div>"
 						break;
 					case "large":
+						if (data && data.resource_url) return "<a href='" + data.resource_url + "' target='blank'>" + "<div class='large_box box'>" + img + "<div class='box_div'><h2 class='box_title box_overlay'>" + title + "</h2><h4 class='box_blurb box_overlay'>"+ blurb + "</h4></div></div>" + "</a>"
 						return "<div class='large_box box'>" + img + "<div class='box_div'><h2 class='box_title box_overlay'>" + title + "</h2><h4 class='box_blurb box_overlay'>"+ blurb + "</h4></div></div>"
 						break;
 				}
