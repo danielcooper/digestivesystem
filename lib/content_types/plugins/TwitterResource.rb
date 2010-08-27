@@ -1,3 +1,4 @@
+
 class ContentTypes::Plugins::TwitterResource < ContentTypes::Base
 
   def initialize url

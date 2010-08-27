@@ -33,5 +33,4 @@ class ContentTypes::Plugins::BBCEpisodeResource < ContentTypes::Base
       {:resource_url => @url, :title => @episode_data["programme"]["title"], :blurb => @episode_data["programme"]["short_synopsis"], :type => self.class.model.to_s.camelize, :pid => @pid, :external_image_url => "http://www.bbc.co.uk/iplayer/images/episode/#{@pid}_640_360.jpg"}
     end
   end
-
 end
