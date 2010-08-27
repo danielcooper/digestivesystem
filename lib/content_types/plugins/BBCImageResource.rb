@@ -18,7 +18,7 @@ class ContentTypes::Plugins::BBCImageResource < ContentTypes::Base
 
   def attributes
     @attributes ||= begin
-      {:resource_url => @url, :type => self.class.model, :exturnal_image_url => @url}
+      {:resource_url => @url, :type => self.class.model, :external_image_url => @url}
     end
   end
 
