@@ -1,6 +1,6 @@
 <% title "Exposures currently on the #{@stream.display_name} for #{@service.display_name}" %>
 <% for exposure in @exposures %>
-  <li><%=h exposure.title %>, <%=h exposure.blurb %></li>
+<p><%=  show_exposure_preview exposure %></p>
 <% end %>
 
 

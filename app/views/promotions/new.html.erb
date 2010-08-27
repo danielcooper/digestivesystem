@@ -89,6 +89,8 @@
   <%= f.hidden_field :type, :value => @resource.type %>
   <%= f.hidden_field :title,:value => @resource.title %>
   <%= f.hidden_field :blurb, :value => @resource.blurb %>
+  <%= f.hidden_field :artist_name, :value => @resource.artist_name %>
+  <%= f.hidden_field :artist_gid, :value => @resource.blurb %>
   <%= f.hidden_field :resource_url, :value => @resource.resource_url %>
   <% if @resource.external_image_url != nil %>
     <% @resource.external_image_url = [@resource.external_image_url] unless @resource.external_image_url.is_a? Array  %>
@@ -141,5 +143,3 @@
 
   <p><%= f.submit %></p>
 <%end%>
-
-<p><%= link_to "Back to List", service_promotions_path %></p>
